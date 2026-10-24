@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;min-height:100%;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { 'colors': { 'on-secondary-container': '#00424e', 'on-tertiary-container': '#00311f', 'error-container': '#93000a', 'inverse-on-surface': '#2c303a', 'on-secondary-fixed-variant': '#004e5c', 'surface-bright': '#353943', 'secondary-fixed-dim': '#4cd7f6', 'secondary-fixed': '#acedff', 'primary-fixed': '#ffdbcf', 'error': '#ffb4ab', 'surface-container-high': '#262a34', 'tertiary-container': '#00a572', 'surface-tint': '#ffb59c', 'on-secondary': '#003640', 'surface-container-lowest': '#0a0e17', 'secondary': '#4cd7f6', 'tertiary-fixed-dim': '#4edea3', 'surface-container': '#1c1f29', 'on-primary-fixed': '#390c00', 'primary': '#ffb59c', 'surface-dim': '#0f131c', 'on-error-container': '#ffdad6', 'on-primary': '#5c1900', 'surface-container-low': '#181b25', 'primary-fixed-dim': '#ffb59c', 'on-secondary-fixed': '#001f26', 'outline-variant': '#5c4037', 'inverse-surface': '#dfe2ef', 'on-surface': '#dfe2ef', 'on-tertiary-fixed-variant': '#005236', 'surface-container-highest': '#31353f', 'on-primary-container': '#511500', 'on-primary-fixed-variant': '#822700', 'on-tertiary': '#003824', 'tertiary': '#4edea3', 'on-error': '#690005', 'on-surface-variant': '#e5beb2', 'primary-container': '#ff5708', 'secondary-container': '#03b5d3', 'on-background': '#dfe2ef', 'on-tertiary-fixed': '#002113', 'outline': '#ac897e', 'surface': '#0f131c', 'background': '#0f131c', 'inverse-primary': '#aa3600', 'surface-variant': '#31353f', 'tertiary-fixed': '#6ffbbe' }, 'borderRadius': { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, 'spacing': { 'space-md': '1rem', 'space-xs': '0.25rem', 'margin-tablet': '2rem', 'gutter': '1rem', 'margin-desktop': '3rem', 'space-lg': '1.5rem', 'gutter-sm': '0.75rem', 'space-sm': '0.5rem', 'space-xl': '2rem', 'margin': '1.25rem' }, 'fontFamily': { 'headline-md': ['Sora'], 'label-data-lg': ['JetBrains Mono'], 'headline-lg': ['Sora'], 'body-sm': ['Plus Jakarta Sans'], 'body-md': ['Plus Jakarta Sans'], 'display-lg-mobile': ['Sora'], 'headline-sm': ['Sora'], 'label-data-md': ['JetBrains Mono'], 'body-lg': ['Plus Jakarta Sans'], 'label-data-sm': ['JetBrains Mono'], 'display-lg': ['Sora'] }, 'fontSize': { 'headline-md': ['22px', { 'lineHeight': '28px', 'letterSpacing': '-0.01em', 'fontWeight': '600' }], 'label-data-lg': ['16px', { 'lineHeight': '20px', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'headline-lg': ['28px', { 'lineHeight': '36px', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'body-sm': ['12px', { 'lineHeight': '16px', 'fontWeight': '400' }], 'body-md': ['14px', { 'lineHeight': '20px', 'fontWeight': '400' }], 'display-lg-mobile': ['32px', { 'lineHeight': '40px', 'letterSpacing': '-0.02em', 'fontWeight': '700' }], 'headline-sm': ['18px', { 'lineHeight': '24px', 'fontWeight': '600' }], 'label-data-md': ['12px', { 'lineHeight': '16px', 'letterSpacing': '0.02em', 'fontWeight': '500' }], 'body-lg': ['16px', { 'lineHeight': '24px', 'fontWeight': '400' }], 'label-data-sm': ['10px', { 'lineHeight': '14px', 'letterSpacing': '0.04em', 'fontWeight': '500' }], 'display-lg': ['40px', { 'lineHeight': '48px', 'letterSpacing': '-0.03em', 'fontWeight': '700' }] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-primary-container selection:text-white"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.4)]"><div class="h-20 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><img alt="NutriPulse Brand Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1U9r5NiLqOdPFUe8L1NaZvB1i9_O15h56WBEn1rQ58XtIjqYlmJKfg5GeSWaRIkZCzdEswFVsLkh71Fcdr_bTnU27gpEApyX15ESg6EX9qUl92sxAGVp57RA-oHrHk9C24XpOLElRFPr31xZD9A8TskV3JiqulTINzLBqNJk0PhIjVDV1AEbK8LQZk_5-x3CEkOJv4qX8FaTQMERdxAIn66tGjM3pd8waiqNt0WkK3Yxv10StKH3wT7j1M"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-on-surface truncate">NUTRIPULSE</span></div><span class="font-label-data-sm text-label-data-sm text-on-surface-variant/70 uppercase tracking-wider truncate">PRO PLANNER • AI Diet &amp; Workout Engine</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><div class="hidden sm:flex items-center gap-1 bg-surface-container-high/60 backdrop-blur-md px-2 py-1 rounded-full"><span class="text-xs">🔥</span><span class="font-label-data-sm text-label-data-sm text-primary-fixed">14 Days</span></div><div class="flex items-center gap-1 bg-surface-container-high/60 backdrop-blur-md px-2.5 py-1 rounded-full"><span class="text-xs">💧</span><span class="font-label-data-sm text-label-data-sm text-secondary-fixed-dim">1.8L</span></div><button aria-label="Profile" class="w-11 h-11 flex items-center justify-center rounded-full ml-space-xs" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb2ue5lZRjOfMrvJlciQU227i0Fu-b70BJhGAbz03zfPq_1VfLTnFVu0xFBogjKAJWq5TF5vUS8t-tvwLE1FDPy6byLcahR980RwJGR74xvan5lECPnr4Qn9W9BX01oZHhzmmgVJjhIoyU7MKz8YhZvK7-UsV7_qeaCuPk01ta7c7J4pProRh-FoYf90tf0S8gltW6obRNkvvDaUT1LKRpjM2tRjMnh39KkYuM6xUcRZdAN6pK1Nvv0A"/></button></div></div></header><main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full relative px-margin space-y-space-md">
+<!-- Subtle Ambient Glow Background Layer -->
+<div class="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 w-[340px] h-[340px] bg-primary-container/10 rounded-full blur-[90px] -z-10"></div>
+<div class="pointer-events-none absolute top-[480px] -right-16 w-[280px] h-[280px] bg-secondary/10 rounded-full blur-[80px] -z-10"></div>
+<div class="pointer-events-none absolute bottom-12 -left-12 w-[260px] h-[260px] bg-tertiary/10 rounded-full blur-[80px] -z-10"></div>
+<!-- Athletic Quick State Ribbon -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse shadow-[0_0_8px_rgba(78,222,163,0.8)]"></span>
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wider text-on-surface-variant font-medium">Telemetry Synced • Phase 2 Cut</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-primary-fixed bg-surface-container-high px-2 py-0.5 rounded-full">Day 14 / 60</span>
+</div>
+<!-- Calorie Target Telemetry Card -->
+<section class="w-full rounded-xl bg-surface-container/75 backdrop-blur-xl p-space-md shadow-xl relative overflow-hidden">
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="min-w-0">
+<p class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase tracking-wider">Caloric Expenditure</p>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-display-lg-mobile text-display-lg-mobile font-bold text-on-surface tracking-tight" id="cal-remaining">1,840</span>
+<span class="font-label-data-md text-label-data-md text-on-surface-variant uppercase">/ 2,400 kcal</span>
+</div>
+<p class="font-body-sm text-body-sm text-tertiary mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">trending_up</span> 560 kcal consumed today
+        </p>
+</div>
+<!-- Animated Circular Progress Ring -->
+<div class="relative w-24 h-24 flex-shrink-0 flex items-center justify-center">
+<svg class="w-24 h-24 transform -rotate-90" viewbox="0 0 96 96">
+<circle cx="48" cy="48" fill="transparent" r="40" stroke="rgba(255,255,255,0.08)" stroke-width="7"></circle>
+<circle class="transition-all duration-1000 ease-out" cx="48" cy="48" fill="transparent" id="calorie-progress-circle" r="40" stroke="#ff5708" stroke-dasharray="251.32" stroke-dashoffset="58" stroke-linecap="round" stroke-width="7"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-label-data-lg text-label-data-lg text-primary-fixed font-bold leading-none">77%</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase text-[9px] mt-0.5">Target</span>
+</div>
+</div>
+</div>
+<!-- 3 Core Macros Linear Telemetry -->
+<div class="grid grid-cols-3 gap-space-sm pt-space-sm">
+<!-- Protein -->
+<div class="bg-surface-container-low/80 rounded-lg p-space-sm">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wide text-tertiary">Protein</span>
+<span class="font-label-data-sm text-label-data-sm font-semibold text-on-surface">80%</span>
+</div>
+<p class="font-label-data-md text-label-data-md text-on-surface font-semibold">145<span class="text-on-surface-variant text-[10px]">/180g</span></p>
+<div class="w-full bg-surface-container-highest/60 rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full transition-all duration-700 shadow-[0_0_10px_rgba(78,222,163,0.5)]" style="width: 80%"></div>
+</div>
+</div>
+<!-- Carbs -->
+<div class="bg-surface-container-low/80 rounded-lg p-space-sm">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wide text-primary-container">Carbs</span>
+<span class="font-label-data-sm text-label-data-sm font-semibold text-on-surface">81%</span>
+</div>
+<p class="font-label-data-md text-label-data-md text-on-surface font-semibold">210<span class="text-on-surface-variant text-[10px]">/260g</span></p>
+<div class="w-full bg-surface-container-highest/60 rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-700 shadow-[0_0_10px_rgba(255,87,8,0.5)]" style="width: 81%"></div>
+</div>
+</div>
+<!-- Fats -->
+<div class="bg-surface-container-low/80 rounded-lg p-space-sm">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wide text-secondary-fixed-dim">Fats</span>
+<span class="font-label-data-sm text-label-data-sm font-semibold text-on-surface">74%</span>
+</div>
+<p class="font-label-data-md text-label-data-md text-on-surface font-semibold">52<span class="text-on-surface-variant text-[10px]">/70g</span></p>
+<div class="w-full bg-surface-container-highest/60 rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="bg-secondary-fixed-dim h-full rounded-full transition-all duration-700 shadow-[0_0_10px_rgba(76,215,246,0.5)]" style="width: 74%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Hydration Water Tracker Card -->
+<section class="w-full rounded-xl bg-surface-container/75 backdrop-blur-xl p-space-md shadow-xl relative overflow-hidden">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">water_drop</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Hydration Matrix</h2>
+<span class="font-label-data-sm text-label-data-sm text-secondary-fixed-dim" id="water-logged-text">1.8L of 2.5L Target</span>
+</div>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] text-secondary">alarm</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant">Next: 2:30 PM</span>
+</div>
+</div>
+<!-- Interactive Glass Tap Indicators (10 x 250ml units = 2.5L) -->
+<div class="grid grid-cols-10 gap-1.5 pt-1 pb-2" id="water-bar-container">
+<button aria-label="Water unit 1" class="water-unit h-9 rounded-md bg-secondary text-on-secondary flex flex-col items-center justify-center transition-all duration-200 active:scale-95 shadow-[0_0_8px_rgba(76,215,246,0.4)]" type="button">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</button>
+<button aria-label="Water unit 2" class="water-unit h-9 rounded-md bg-secondary text-on-secondary flex flex-col items-center justify-center transition-all duration-200 active:scale-95 shadow-[0_0_8px_rgba(76,215,246,0.4)]" type="button">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</button>
+<button aria-label="Water unit 3" class="water-unit h-9 rounded-md bg-secondary text-on-secondary flex flex-col items-center justify-center transition-all duration-200 active:scale-95 shadow-[0_0_8px_rgba(76,215,246,0.4)]" type="button">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</button>
+<button aria-label="Water unit 4" class="water-unit h-9 rounded-md bg-secondary text-on-secondary flex flex-col items-center justify-center transition-all duration-200 active:scale-95 shadow-[0_0_8px_rgba(76,215,246,0.4)]" type="button">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</button>
+<button aria-label="Water unit 5" class="water-unit h-9 rounded-md bg-secondary text-on-secondary flex flex-col items-center justify-center transition-all duration-200 active:scale-95 shadow-[0_0_8px_rgba(76,215,246,0.4)]" type="button">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</button>
+<button aria-label="Water unit 6" class="water-unit h-9 rounded-md bg-secondary text-on-secondary flex flex-col items-center justify-center transition-all duration-200 active:scale-95 shadow-[0_0_8px_rgba(76,215,246,0.4)]" type="button">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</button>
+<button aria-label="Water unit 7" class="water-unit h-9 rounded-md bg-secondary text-on-secondary flex flex-col items-center justify-center transition-all duration-200 active:scale-95 shadow-[0_0_8px_rgba(76,215,246,0.4)]" type="button">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</button>
+<button aria-label="Water unit 8" class="water-unit h-9 rounded-md bg-surface-container-high text-on-surface-variant/40 flex flex-col items-center justify-center transition-all duration-200 active:scale-95 hover:bg-secondary/40 hover:text-white" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+</button>
+<button aria-label="Water unit 9" class="water-unit h-9 rounded-md bg-surface-container-high text-on-surface-variant/40 flex flex-col items-center justify-center transition-all duration-200 active:scale-95 hover:bg-secondary/40 hover:text-white" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+</button>
+<button aria-label="Water unit 10" class="water-unit h-9 rounded-md bg-surface-container-high text-on-surface-variant/40 flex flex-col items-center justify-center transition-all duration-200 active:scale-95 hover:bg-secondary/40 hover:text-white" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+</button>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-data-sm text-label-data-sm mt-1">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span> Optimal Hydration
+      </span>
+<span>Tap bar to toggle 250ml</span>
+</div>
+</section>
+<!-- Interactive Quick Switchable Chart: Weight & Biometric Trajectory -->
+<section class="w-full rounded-xl bg-surface-container/75 backdrop-blur-xl p-space-md shadow-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight" id="trajectory-title">Weight Trajectory</h2>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-data-sm font-semibold bg-tertiary/15 text-tertiary">-0.4 kg</span>
+</div>
+<p class="font-label-data-sm text-label-data-sm text-on-surface-variant mt-0.5" id="trajectory-sub">Current: 74.2 kg • Goal: 72.0 kg</p>
+</div>
+<!-- Segmented Metric Switcher -->
+<div class="flex bg-surface-container-lowest p-0.5 rounded-lg" id="chart-toggle-group">
+<button class="px-2.5 py-1 rounded font-label-data-sm text-label-data-sm font-semibold bg-surface-container-high text-on-surface shadow-sm transition-all" id="btn-toggle-weight" type="button">Weight</button>
+<button class="px-2.5 py-1 rounded font-label-data-sm text-label-data-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all" id="btn-toggle-bmi" type="button">BMI</button>
+</div>
+</div>
+<!-- Inline Telemetry Trajectory Chart -->
+<div class="relative w-full h-36 bg-surface-container-lowest/70 rounded-lg p-space-sm flex flex-col justify-between overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-tertiary/5 via-transparent to-transparent pointer-events-none"></div>
+<!-- Target Goal Baseline -->
+<div class="absolute top-[68%] left-0 right-0 border-b border-dashed border-tertiary/30 flex justify-end pr-2">
+<span class="font-label-data-sm text-[9px] text-tertiary/80 uppercase tracking-widest bg-surface-container-lowest/80 px-1 rounded -translate-y-1/2">Goal Ref: 72.0 kg</span>
+</div>
+<svg class="w-full h-24 overflow-visible" preserveaspectratio="none" viewbox="0 0 300 80">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#4edea3" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#4edea3" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Area fill under line -->
+<path d="M 0,25 Q 40,28 75,32 T 150,42 T 225,50 T 300,58 L 300,80 L 0,80 Z" fill="url(#chartGradient)" id="chart-area"></path>
+<!-- Trend stroke line -->
+<path d="M 0,25 Q 40,28 75,32 T 150,42 T 225,50 T 300,58" fill="none" id="chart-line" stroke="#4edea3" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Highlight nodes -->
+<circle class="drop-shadow-[0_0_6px_rgba(78,222,163,0.8)]" cx="0" cy="25" fill="#4edea3" r="3.5"></circle>
+<circle cx="75" cy="32" fill="#4edea3" r="3"></circle>
+<circle cx="150" cy="42" fill="#4edea3" r="3"></circle>
+<circle cx="225" cy="50" fill="#4edea3" r="3"></circle>
+<circle class="drop-shadow-[0_0_10px_rgba(78,222,163,1)]" cx="300" cy="58" fill="#ffffff" r="4.5" stroke="#4edea3" stroke-width="2.5"></circle>
+</svg>
+<div class="flex justify-between items-center text-on-surface-variant font-label-data-sm text-label-data-sm pt-1">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span class="text-tertiary font-bold">Today</span>
+</div>
+</div>
+</section>
+<!-- Today's Meal Journal Section -->
+<section class="w-full space-y-space-sm pb-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px]">restaurant</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Today's Fuel Journal</h2>
+</div>
+<button class="flex items-center gap-1 text-primary-fixed bg-primary-container/20 hover:bg-primary-container/30 px-3 py-1.5 rounded-full font-label-data-sm text-label-data-sm transition-all active:scale-95" id="quick-log-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Log Meal</span>
+</button>
+</div>
+<!-- Breakfast Card -->
+<article class="w-full rounded-xl bg-surface-container/75 backdrop-blur-xl p-space-md shadow-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="High-protein rolled oats bowl topped with clean vanilla whey scoop, fresh blueberries, and chia seeds on dark slate background in cinematic warm athletic kitchen lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwWNdGUpii8q7ky-MlQV56atPqQnZ0uy8i9Bu4uWcjQKMfojCak0KVVogaoE_T0S0Lv4Euy65EJNXXSdIfQ1zIcXeEsB-Hbdpjgpqyu8-V8wG5jzIgZXbUoe5j36zmrcQzUWmU5kxCwigaZ6d4MXlwXISFrDC9w54ITwtce2n1AIRyFU2I2QOyh8WNd2l0i3O9iDrqGbQMn0CaLwwrbUF1bxmi6IB3IQZRDOHYQax-Uhqb1k4_ZgkSgg"/>
+<div class="absolute bottom-0 inset-x-0 h-4 bg-gradient-to-t from-black/80 to-transparent"></div>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase tracking-wider">Breakfast • 08:15 AM</span>
+</div>
+<h3 class="font-headline-sm text-body-lg font-semibold text-on-surface truncate">Oatmeal &amp; Vanilla Whey</h3>
+<p class="font-label-data-sm text-label-data-sm text-on-surface-variant/80 mt-0.5">38g P • 56g C • 8g F</p>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0">
+<span class="font-label-data-lg text-label-data-lg font-bold text-on-surface">480</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase text-[10px]">kcal</span>
+</div>
+</article>
+<!-- Lunch Card (with visual photo verified tag) -->
+<article class="w-full rounded-xl bg-surface-container/75 backdrop-blur-xl p-space-md shadow-md flex items-center justify-between gap-space-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<div class="flex items-center gap-space-md min-w-0 pl-1">
+<div class="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Seared wild salmon fillet over tri-color quinoa with sliced avocado, steamed asparagus, and microgreens photographed from top angle in high-contrast athletic culinary studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBepohGeos7YWhSqUSVrlD-qpamZyOB0RJHxq2QFSJrd38kIFVPSHrNtoNVEW_wIDC2VLwKU7F98vpjQWntZ1E-8vDS9471saCfhuO-17G4re3vaLowO0HdJWfj28JkNl22YvuT-76h8PviYtyYX1gyAsjxMgRRfTJQu1k5L7ywgp_X2phM-HNxfTnuBRFLd0SpZZx4Zd6JGw8znozkrLr51yXF8cZYEZnheIQmPuCINMA5Y0NMehHDZg"/>
+<span class="absolute top-1 left-1 bg-surface-container-lowest/90 text-tertiary rounded-full p-0.5 flex items-center justify-center shadow">
+<span class="material-symbols-outlined text-[11px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase tracking-wider">Lunch • 01:10 PM</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary-container/30 text-tertiary-fixed text-[9px] font-label-data-sm uppercase font-semibold">AI Verified</span>
+</div>
+<h3 class="font-headline-sm text-body-lg font-semibold text-on-surface truncate">Grilled Salmon Quinoa Bowl</h3>
+<p class="font-label-data-sm text-label-data-sm text-on-surface-variant/80 mt-0.5">52g P • 44g C • 24g F</p>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0">
+<span class="font-label-data-lg text-label-data-lg font-bold text-on-surface">650</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase text-[10px]">kcal</span>
+</div>
+</article>
+<!-- Snack Card -->
+<article class="w-full rounded-xl bg-surface-container/75 backdrop-blur-xl p-space-md shadow-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Thick strained Icelandic Greek yogurt served in a sleek dark ceramic dish crowned with fresh wild blackberries and crushed walnuts, dramatic directional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGigvxCb4Z4cqUlimVvdd5uRVDGx7S0LFbFj9I4HzUG9FK73EQmO2HKKNrMt-mQIvyx5JlFBk-W9ONCM4Y1qTHI3SRuNXFOeAvDbp50pB-iJGPCOZjK5D_7v4vMc0dTuoLNos56WkMM5wRITsibwTZ_o6YOLUcpIfu3ocK0kMjpbHjd9xNGuNCPhCBE0jV4e7O2VIDYNB-WrxKvUDitk1uFlGnnhONOaD13JkWLiq5imIOSiAbPKFnOg"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase tracking-wider">Snack • 04:30 PM</span>
+</div>
+<h3 class="font-headline-sm text-body-lg font-semibold text-on-surface truncate">Greek Yogurt &amp; Berries</h3>
+<p class="font-label-data-sm text-label-data-sm text-on-surface-variant/80 mt-0.5">22g P • 18g C • 4g F</p>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0">
+<span class="font-label-data-lg text-label-data-lg font-bold text-on-surface">210</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase text-[10px]">kcal</span>
+</div>
+</article>
+</section>
+<!-- Interactive Quick Log Action Overlay (Modal-free inline drawer) -->
+<div class="hidden transition-all duration-300 w-full rounded-xl bg-surface-container-high/95 backdrop-blur-2xl p-space-md shadow-2xl mb-space-md" id="quick-log-drawer">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-[20px]">bolt</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Speed Macro Entry</span>
+</div>
+<button class="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant" id="close-drawer-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-space-sm mb-space-sm">
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-3 py-2.5 rounded-lg outline-none placeholder:text-on-surface-variant/40" placeholder="Item name (e.g. Protein Bar)" type="text"/>
+<input class="w-full bg-surface-container-lowest text-on-surface font-label-data-md text-label-data-md px-3 py-2.5 rounded-lg outline-none placeholder:text-on-surface-variant/40" placeholder="Est. Calories" type="number"/>
+</div>
+<button class="w-full py-2.5 rounded-full bg-gradient-to-r from-primary-container to-primary text-white font-headline-sm text-body-md font-semibold tracking-wide shadow-md active:scale-98 transition-transform" id="confirm-log-btn" type="button">
+      Record to Fuel Log
+    </button>
+</div>
+</div>
+<script>
+  (function () {
+    // Interactive Water Unit Tracker
+    const waterButtons = document.querySelectorAll('.water-unit');
+    const waterLoggedText = document.getElementById('water-logged-text');
+    let filledUnits = 7; // initial 7 out of 10 (1.75 ~ 1.8L)
+
+    function updateWaterDisplay() {
+      waterButtons.forEach((btn, idx) => {
+        if (idx < filledUnits) {
+          btn.className = "water-unit h-9 rounded-md bg-secondary text-on-secondary flex flex-col items-center justify-center transition-all duration-200 active:scale-95 shadow-[0_0_8px_rgba(76,215,246,0.4)]";
+          btn.innerHTML = '<span class="material-symbols-outlined text-[13px]">check</span>';
+        } else {
+          btn.className = "water-unit h-9 rounded-md bg-surface-container-high text-on-surface-variant/40 flex flex-col items-center justify-center transition-all duration-200 active:scale-95 hover:bg-secondary/40 hover:text-white";
+          btn.innerHTML = '<span class="material-symbols-outlined text-[13px]">add</span>';
+        }
+      });
+      const liters = (filledUnits * 0.25).toFixed(1);
+      if (waterLoggedText) {
+        waterLoggedText.textContent = liters + 'L of 2.5L Target';
+      }
+    }
+
+    waterButtons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        if (index === filledUnits - 1) {
+          filledUnits = Math.max(0, filledUnits - 1);
+        } else {
+          filledUnits = index + 1;
+        }
+        updateWaterDisplay();
+      });
+    });
+
+    // Chart Switcher: Weight vs BMI Trajectory
+    const btnWeight = document.getElementById('btn-toggle-weight');
+    const btnBmi = document.getElementById('btn-toggle-bmi');
+    const title = document.getElementById('trajectory-title');
+    const subtitle = document.getElementById('trajectory-sub');
+    const chartLine = document.getElementById('chart-line');
+    const chartArea = document.getElementById('chart-area');
+
+    if (btnWeight && btnBmi) {
+      btnWeight.addEventListener('click', () => {
+        btnWeight.className = "px-2.5 py-1 rounded font-label-data-sm text-label-data-sm font-semibold bg-surface-container-high text-on-surface shadow-sm transition-all";
+        btnBmi.className = "px-2.5 py-1 rounded font-label-data-sm text-label-data-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all";
+        title.textContent = "Weight Trajectory";
+        subtitle.textContent = "Current: 74.2 kg \u2022 Goal: 72.0 kg";
+        chartLine.setAttribute('d', 'M 0,25 Q 40,28 75,32 T 150,42 T 225,50 T 300,58');
+        chartArea.setAttribute('d', 'M 0,25 Q 40,28 75,32 T 150,42 T 225,50 T 300,58 L 300,80 L 0,80 Z');
+      });
+
+      btnBmi.addEventListener('click', () => {
+        btnBmi.className = "px-2.5 py-1 rounded font-label-data-sm text-label-data-sm font-semibold bg-surface-container-high text-on-surface shadow-sm transition-all";
+        btnWeight.className = "px-2.5 py-1 rounded font-label-data-sm text-label-data-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all";
+        title.textContent = "BMI Index Trajectory";
+        subtitle.textContent = "Current: 22.8 BMI \u2022 Athletic Normal";
+        chartLine.setAttribute('d', 'M 0,20 Q 50,22 100,26 T 200,34 T 300,40');
+        chartArea.setAttribute('d', 'M 0,20 Q 50,22 100,26 T 200,34 T 300,40 L 300,80 L 0,80 Z');
+      });
+    }
+
+    // Quick Log Action Drawer Trigger
+    const quickLogBtn = document.getElementById('quick-log-btn');
+    const quickDrawer = document.getElementById('quick-log-drawer');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const confirmLogBtn = document.getElementById('confirm-log-btn');
+
+    if (quickLogBtn && quickDrawer) {
+      quickLogBtn.addEventListener('click', () => {
+        quickDrawer.classList.toggle('hidden');
+        if (!quickDrawer.classList.contains('hidden')) {
+          quickDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    }
+
+    if (closeDrawerBtn && quickDrawer) {
+      closeDrawerBtn.addEventListener('click', () => {
+        quickDrawer.classList.add('hidden');
+      });
+    }
+
+    if (confirmLogBtn && quickDrawer) {
+      confirmLogBtn.addEventListener('click', () => {
+        confirmLogBtn.textContent = 'Meal Successfully Synced!';
+        setTimeout(() => {
+          quickDrawer.classList.add('hidden');
+          confirmLogBtn.textContent = 'Record to Fuel Log';
+        }, 800);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-8px_32px_rgba(0,0,0,0.6)]" data-active-classes="text-primary-container drop-shadow-[0_0_12px_rgba(255,87,8,0.5)]"><div class="flex justify-around items-center h-20 px-space-sm"><a aria-current="page" class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] transition-all text-primary-container drop-shadow-[0_0_12px_rgba(255,87,8,0.5)]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">vital_signs</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Today</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] -mt-5 group" data-path="ai-scanner" href="#"><div class="w-13 h-13 p-3 rounded-full bg-primary-container text-white shadow-[0_0_24px_rgba(255,87,8,0.45)] flex items-center justify-center transition-transform active:scale-95"><span class="material-symbols-outlined text-[26px]">photo_camera</span></div><span class="font-label-data-sm text-label-data-sm text-on-surface group-hover:text-primary-container font-semibold tracking-wide mt-0.5">Scan AI</span></a><a class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-all" data-path="meal-prep" href="#"><span class="material-symbols-outlined text-[24px]">restaurant_menu</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Meals</span></a><a class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-all" data-path="workout" href="#"><span class="material-symbols-outlined text-[24px]">fitness_center</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Workouts</span></a></div></nav></body></html>

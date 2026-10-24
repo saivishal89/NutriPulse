@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;min-height:100%;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { 'colors': { 'on-secondary-container': '#00424e', 'on-tertiary-container': '#00311f', 'error-container': '#93000a', 'inverse-on-surface': '#2c303a', 'on-secondary-fixed-variant': '#004e5c', 'surface-bright': '#353943', 'secondary-fixed-dim': '#4cd7f6', 'secondary-fixed': '#acedff', 'primary-fixed': '#ffdbcf', 'error': '#ffb4ab', 'surface-container-high': '#262a34', 'tertiary-container': '#00a572', 'surface-tint': '#ffb59c', 'on-secondary': '#003640', 'surface-container-lowest': '#0a0e17', 'secondary': '#4cd7f6', 'tertiary-fixed-dim': '#4edea3', 'surface-container': '#1c1f29', 'on-primary-fixed': '#390c00', 'primary': '#ffb59c', 'surface-dim': '#0f131c', 'on-error-container': '#ffdad6', 'on-primary': '#5c1900', 'surface-container-low': '#181b25', 'primary-fixed-dim': '#ffb59c', 'on-secondary-fixed': '#001f26', 'outline-variant': '#5c4037', 'inverse-surface': '#dfe2ef', 'on-surface': '#dfe2ef', 'on-tertiary-fixed-variant': '#005236', 'surface-container-highest': '#31353f', 'on-primary-container': '#511500', 'on-primary-fixed-variant': '#822700', 'on-tertiary': '#003824', 'tertiary': '#4edea3', 'on-error': '#690005', 'on-surface-variant': '#e5beb2', 'primary-container': '#ff5708', 'secondary-container': '#03b5d3', 'on-background': '#dfe2ef', 'on-tertiary-fixed': '#002113', 'outline': '#ac897e', 'surface': '#0f131c', 'background': '#0f131c', 'inverse-primary': '#aa3600', 'surface-variant': '#31353f', 'tertiary-fixed': '#6ffbbe' }, 'borderRadius': { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, 'spacing': { 'space-md': '1rem', 'space-xs': '0.25rem', 'margin-tablet': '2rem', 'gutter': '1rem', 'margin-desktop': '3rem', 'space-lg': '1.5rem', 'gutter-sm': '0.75rem', 'space-sm': '0.5rem', 'space-xl': '2rem', 'margin': '1.25rem' }, 'fontFamily': { 'headline-md': ['Sora'], 'label-data-lg': ['JetBrains Mono'], 'headline-lg': ['Sora'], 'body-sm': ['Plus Jakarta Sans'], 'body-md': ['Plus Jakarta Sans'], 'display-lg-mobile': ['Sora'], 'headline-sm': ['Sora'], 'label-data-md': ['JetBrains Mono'], 'body-lg': ['Plus Jakarta Sans'], 'label-data-sm': ['JetBrains Mono'], 'display-lg': ['Sora'] }, 'fontSize': { 'headline-md': ['22px', { 'lineHeight': '28px', 'letterSpacing': '-0.01em', 'fontWeight': '600' }], 'label-data-lg': ['16px', { 'lineHeight': '20px', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'headline-lg': ['28px', { 'lineHeight': '36px', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'body-sm': ['12px', { 'lineHeight': '16px', 'fontWeight': '400' }], 'body-md': ['14px', { 'lineHeight': '20px', 'fontWeight': '400' }], 'display-lg-mobile': ['32px', { 'lineHeight': '40px', 'letterSpacing': '-0.02em', 'fontWeight': '700' }], 'headline-sm': ['18px', { 'lineHeight': '24px', 'fontWeight': '600' }], 'label-data-md': ['12px', { 'lineHeight': '16px', 'letterSpacing': '0.02em', 'fontWeight': '500' }], 'body-lg': ['16px', { 'lineHeight': '24px', 'fontWeight': '400' }], 'label-data-sm': ['10px', { 'lineHeight': '14px', 'letterSpacing': '0.04em', 'fontWeight': '500' }], 'display-lg': ['40px', { 'lineHeight': '48px', 'letterSpacing': '-0.03em', 'fontWeight': '700' }] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-primary-container selection:text-white"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.4)]"><div class="h-20 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><img alt="NutriPulse Brand Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1U9r5NiLqOdPFUe8L1NaZvB1i9_O15h56WBEn1rQ58XtIjqYlmJKfg5GeSWaRIkZCzdEswFVsLkh71Fcdr_bTnU27gpEApyX15ESg6EX9qUl92sxAGVp57RA-oHrHk9C24XpOLElRFPr31xZD9A8TskV3JiqulTINzLBqNJk0PhIjVDV1AEbK8LQZk_5-x3CEkOJv4qX8FaTQMERdxAIn66tGjM3pd8waiqNt0WkK3Yxv10StKH3wT7j1M"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-on-surface truncate">NUTRIPULSE</span></div><span class="font-label-data-sm text-label-data-sm text-on-surface-variant/70 uppercase tracking-wider truncate">PRO PLANNER • AI Diet &amp; Workout Engine</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><div class="hidden sm:flex items-center gap-1 bg-surface-container-high/60 backdrop-blur-md px-2 py-1 rounded-full"><span class="text-xs">🔥</span><span class="font-label-data-sm text-label-data-sm text-primary-fixed">14 Days</span></div><div class="flex items-center gap-1 bg-surface-container-high/60 backdrop-blur-md px-2.5 py-1 rounded-full"><span class="text-xs">💧</span><span class="font-label-data-sm text-label-data-sm text-secondary-fixed-dim">1.8L</span></div><button aria-label="Profile" class="w-11 h-11 flex items-center justify-center rounded-full ml-space-xs" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb2ue5lZRjOfMrvJlciQU227i0Fu-b70BJhGAbz03zfPq_1VfLTnFVu0xFBogjKAJWq5TF5vUS8t-tvwLE1FDPy6byLcahR980RwJGR74xvan5lECPnr4Qn9W9BX01oZHhzmmgVJjhIoyU7MKz8YhZvK7-UsV7_qeaCuPk01ta7c7J4pProRh-FoYf90tf0S8gltW6obRNkvvDaUT1LKRpjM2tRjMnh39KkYuM6xUcRZdAN6pK1Nvv0A"/></button></div></div></header><main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin pb-10 gap-space-lg">
+<!-- Ambient Micro Header Status -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex flex-col">
+<span class="font-label-data-sm text-label-data-sm text-primary uppercase tracking-widest font-semibold flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+        AI Cycle Sync Active
+      </span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Weekly Meal Engine</h2>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-high px-3 py-1.5 rounded-full shadow-md">
+<span class="material-symbols-outlined text-[18px] text-tertiary">bolt</span>
+<span class="font-label-data-sm text-label-data-sm text-tertiary font-bold tracking-tight">MACROS LOCKED</span>
+</div>
+</div>
+<!-- 7-Day Interactive Schedule Carousel -->
+<section class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase tracking-wider">Weekly Horizon • Week 14</span>
+<span class="font-label-data-sm text-label-data-sm text-secondary-fixed-dim">Target: 2,650 kcal avg</span>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 pt-1 -mx-margin px-margin no-scrollbar scroll-smooth" id="day-selector">
+<!-- Mon -->
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-14 py-3 rounded-xl bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">
+<span class="font-label-data-sm text-label-data-sm uppercase font-bold">Mon</span>
+<span class="font-headline-sm text-headline-sm mt-0.5">07</span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-variant mt-1.5"></span>
+</button>
+<!-- Tue -->
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-14 py-3 rounded-xl bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">
+<span class="font-label-data-sm text-label-data-sm uppercase font-bold">Tue</span>
+<span class="font-headline-sm text-headline-sm mt-0.5">08</span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-variant mt-1.5"></span>
+</button>
+<!-- Wed - Active Day -->
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-24 py-3 rounded-xl bg-primary-container text-white shadow-xl shadow-primary-container/30 relative overflow-hidden active:scale-95 transition-all" type="button">
+<div class="absolute -top-4 -right-4 w-10 h-10 bg-white/20 rounded-full blur-sm"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-data-sm text-label-data-sm uppercase font-bold text-white">Wed</span>
+<span class="material-symbols-outlined text-[13px] text-white">local_fire_department</span>
+</div>
+<span class="font-headline-sm text-headline-sm mt-0.5 font-bold">09</span>
+<span class="font-label-data-sm text-[9px] bg-black/25 px-1.5 py-0.5 rounded-full text-white mt-1 whitespace-nowrap">HI-CARB</span>
+</button>
+<!-- Thu -->
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-14 py-3 rounded-xl bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">
+<span class="font-label-data-sm text-label-data-sm uppercase font-bold">Thu</span>
+<span class="font-headline-sm text-headline-sm mt-0.5">10</span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-variant mt-1.5"></span>
+</button>
+<!-- Fri -->
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-14 py-3 rounded-xl bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">
+<span class="font-label-data-sm text-label-data-sm uppercase font-bold">Fri</span>
+<span class="font-headline-sm text-headline-sm mt-0.5">11</span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-variant mt-1.5"></span>
+</button>
+<!-- Sat -->
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-14 py-3 rounded-xl bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">
+<span class="font-label-data-sm text-label-data-sm uppercase font-bold">Sat</span>
+<span class="font-headline-sm text-headline-sm mt-0.5">12</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5"></span>
+</button>
+<!-- Sun (Prep Day) -->
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-16 py-3 rounded-xl bg-surface-container-high text-secondary-fixed-dim active:scale-95 transition-all" type="button">
+<span class="font-label-data-sm text-label-data-sm uppercase font-bold">Sun</span>
+<span class="font-headline-sm text-headline-sm mt-0.5">13</span>
+<span class="font-label-data-sm text-[9px] text-tertiary font-semibold mt-1">BATCH</span>
+</button>
+</div>
+<!-- Micro Day Telemetry Banner -->
+<div class="bg-surface-container-low rounded-xl p-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">fitness_center</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Wed • Heavy Leg &amp; Core Hypertrophy</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant/80">Macro Split: 45% Carb • 35% Prot • 20% Fat</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-data-lg text-label-data-lg text-primary font-bold">2,840</span>
+<span class="block font-label-data-sm text-label-data-sm text-on-surface-variant">KCAL</span>
+</div>
+</div>
+</section>
+<!-- Daily Meal Plan Breakdown Cards -->
+<section class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span>Today's Meal Telemetry</span>
+<span class="bg-surface-container-high text-on-surface-variant text-label-data-sm font-label-data-sm px-2 py-0.5 rounded-full">3 of 3 Loaded</span>
+</h3>
+<button class="font-label-data-sm text-label-data-sm text-secondary flex items-center gap-0.5" type="button">
+<span>Swap</span>
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Breakfast Card -->
+<article class="bg-surface-container rounded-xl p-3.5 shadow-md flex gap-3 relative overflow-hidden group">
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 relative bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Fluffy folded organic egg white omelet filled with steamed dark green baby spinach leaves, fresh cherry tomatoes, and microgreens on a sleek dark slate plate inside a modern athletic kitchen with subtle warm rim lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEAND9sE_kjYpz_LhQ5txB8UfbaeZZiHY8-J-PSnjYm-t22_eaohDA4tzp9hqqjqGS9Pie8SGeTqb4qwV0u7duuxjD9RIH2a_yD08CtRaFY7LNvhjEIiseblQgqxJk2zUDU73i0tSAPk6S4UuFJqDKKnbwTjjtGLDsr9gqQ2iDzaC5xOESwggA4YPOMo7sjluQQ66ZaHwLbMqnbILWBPJ82x8xH9C8-L9wzosrJm3_YC6TTl3feHWyGQ"/>
+<span class="absolute top-1 left-1 bg-surface-container-lowest/80 backdrop-blur-sm text-[10px] font-label-data-sm text-on-surface px-1.5 py-0.5 rounded">07:30</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-data-sm text-label-data-sm text-secondary-fixed-dim uppercase tracking-wider">Breakfast • Phase 1</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface font-semibold">410 kcal</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface truncate mt-0.5">Egg White Omelet &amp; Spinach</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">4 whites, 1 whole egg, baby spinach, avocado slice</p>
+</div>
+<div class="flex items-center gap-1.5 pt-1.5">
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-primary px-2 py-0.5 rounded">38g P</span>
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-secondary px-2 py-0.5 rounded">12g C</span>
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-tertiary px-2 py-0.5 rounded">11g F</span>
+</div>
+</div>
+</article>
+<!-- Lunch Card (Batch Prepped) -->
+<article class="bg-surface-container rounded-xl p-3.5 shadow-md flex gap-3 relative overflow-hidden group">
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 relative bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Meal prep glass container containing perfectly seasoned lean ground turkey with fragrant jasmine rice, steamed broccoli florets, and toasted sesame seeds, high-contrast athletic food photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjb2kZvEHY2ZIV4XUTM7pTy1Oxva1VjshJo88ylYQAbdQlvEZvgiMGdt7yJOOSPMMb1v7SeupNw1EmOzY1N6PUaP5aqyvnsyDsMUuMRdRw86UAP6YbgCyPymboNQa7VBsLTy-1H4KEeCYHFdUxNeQk1J8aYsGF6sXPRO7_Bd-zMLjHo1wzACd08buhFKLNJRVsqXupSLG3gPcr33qUQ60kiK-fmyKH4A6yTJctzSorvu5Rpuu0z-GdgQ"/>
+<span class="absolute top-1 left-1 bg-surface-container-lowest/80 backdrop-blur-sm text-[10px] font-label-data-sm text-tertiary font-bold px-1.5 py-0.5 rounded">PREPPED</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-data-sm text-label-data-sm text-tertiary uppercase tracking-wider">Lunch • Batch #2</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface font-semibold">680 kcal</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface truncate mt-0.5">Turkey &amp; Fragrant Jasmine Rice</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">220g prepped ground turkey, 1.5 cup rice, sesame crunch</p>
+</div>
+<div class="flex items-center gap-1.5 pt-1.5">
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-primary px-2 py-0.5 rounded">52g P</span>
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-secondary px-2 py-0.5 rounded">74g C</span>
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-tertiary px-2 py-0.5 rounded">14g F</span>
+</div>
+</div>
+</article>
+<!-- Dinner Card -->
+<article class="bg-surface-container rounded-xl p-3.5 shadow-md flex gap-3 relative overflow-hidden group">
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 relative bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Golden crisp air-fried Atlantic cod fillet garnished with fresh dill and lemon slices, served alongside charred asparagus spears on a matte black ceramic dish with dark slate background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo_WrQdZfzdUZ9kGU3Es29L-tQl9TFkRCXDJ1yaCAywGw8InpOCSRbdeM6kxMi1GQLDQdlsAuCVPOXJVG8YMpuPqIhBfaViUfgYuHs1bewYqfhmlZ0qxBUUVe_KKBHkiO7dxJHwmfkHg9b_OJRYE2_CsZ0ETdgtqi2L7iKS9IM0EEosmKz7bW1wAUkeW0GvVH533P6aSJ8Jap9mC0cc-8IeGjNIJtrUWQzUK1wiEOWVb-nRV7lFPtwhQ"/>
+<span class="absolute top-1 left-1 bg-surface-container-lowest/80 backdrop-blur-sm text-[10px] font-label-data-sm text-on-surface px-1.5 py-0.5 rounded">19:30</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-data-sm text-label-data-sm text-secondary-fixed-dim uppercase tracking-wider">Dinner • Air Fryer</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface font-semibold">540 kcal</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface truncate mt-0.5">Air-fried Cod &amp; Asparagus</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">200g wild cod fillet, charred green asparagus, lemon drizzle</p>
+</div>
+<div class="flex items-center gap-1.5 pt-1.5">
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-primary px-2 py-0.5 rounded">44g P</span>
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-secondary px-2 py-0.5 rounded">18g C</span>
+<span class="bg-surface-container-high font-label-data-sm text-label-data-sm text-tertiary px-2 py-0.5 rounded">9g F</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Batch Cooking Guide Widget -->
+<section class="bg-surface-container-low rounded-2xl p-4 shadow-lg relative overflow-hidden">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<div class="w-9 h-9 rounded-xl bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">timer</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Sunday Prep Protocol</h3>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant">Batch Cooking • 4 Servings Stored</span>
+</div>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-data-md text-label-data-md text-tertiary font-bold" id="prep-timer">45:00</span>
+</div>
+</div>
+<!-- Step Checklist & Telemetry Tracker -->
+<div class="flex flex-col gap-2 pt-1" id="prep-steps">
+<!-- Step 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container cursor-pointer transition-colors hover:bg-surface-container-high" onclick="toggleStep(this)">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-md bg-tertiary flex items-center justify-center text-on-tertiary text-xs transition-all check-icon">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface line-through opacity-70 step-text">Pre-cook 1kg free-range chicken breasts</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-tertiary font-medium">Done</span>
+</div>
+<!-- Step 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container cursor-pointer transition-colors hover:bg-surface-container-high" onclick="toggleStep(this)">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-md bg-surface-container-highest flex items-center justify-center text-transparent text-xs transition-all check-icon">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface step-text">Roast 800g paprika sweet potato cubes</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-primary font-medium">In Oven</span>
+</div>
+<!-- Step 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container cursor-pointer transition-colors hover:bg-surface-container-high" onclick="toggleStep(this)">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-md bg-surface-container-highest flex items-center justify-center text-transparent text-xs transition-all check-icon">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface step-text">Portion steamed jasmine rice into 4 glass bins</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant font-medium">Next</span>
+</div>
+</div>
+<!-- Micro Audio / Timer Controls -->
+<div class="flex items-center justify-between pt-3 mt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-data-sm text-label-data-sm flex items-center gap-1 active:scale-95" id="timer-btn" onclick="toggleTimer()" type="button">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span id="timer-label">Resume Timer</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center active:scale-95" onclick="resetTimer()" type="button">
+<span class="material-symbols-outlined text-[16px]">replay</span>
+</button>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant/70">Efficiency: 92%</span>
+</div>
+</section>
+<!-- Supermarket Grocery Checklist Drawer / Module -->
+<section class="flex flex-col gap-space-sm bg-surface-container rounded-2xl p-4 shadow-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Supermarket Checklist</h3>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant"><span id="checked-count">3</span> of 6 items collected</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-data-lg text-label-data-lg text-tertiary font-bold" id="est-total">$48.50</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant/80">Est. Supermarket Cart</span>
+</div>
+</div>
+<!-- Progress Indicator Bar -->
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full transition-all duration-300 rounded-full" id="cart-progress-bar" style="width: 50%;"></div>
+</div>
+<!-- Departments Hierarchy -->
+<div class="flex flex-col gap-space-md pt-2">
+<!-- Produce Section -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-data-sm text-label-data-sm text-secondary uppercase tracking-widest font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">eco</span>
+            Fresh Produce
+          </span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant/70">Aisle 1 • Cold Rack</span>
+</div>
+<div class="grid grid-cols-1 gap-2">
+<!-- Item 1 -->
+<label class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low cursor-pointer active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-md accent-tertiary bg-surface-container-high cursor-pointer grocery-item" data-price="4.20" onchange="updateGroceryStats()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface grocery-title line-through opacity-70">Organic Baby Spinach (300g)</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant font-mono">$4.20</span>
+</label>
+<!-- Item 2 -->
+<label class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low cursor-pointer active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-md accent-tertiary bg-surface-container-high cursor-pointer grocery-item" data-price="5.50" onchange="updateGroceryStats()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface grocery-title line-through opacity-70">Ripe Hass Avocados (Pack of 3)</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant font-mono">$5.50</span>
+</label>
+</div>
+</div>
+<!-- Lean Proteins Section -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-data-sm text-label-data-sm text-primary uppercase tracking-widest font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">egg_alt</span>
+            Lean Proteins &amp; Seafood
+          </span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant/70">Aisle 4 • Butcher</span>
+</div>
+<div class="grid grid-cols-1 gap-2">
+<!-- Item 3 -->
+<label class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low cursor-pointer active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-md accent-tertiary bg-surface-container-high cursor-pointer grocery-item" data-price="18.90" onchange="updateGroceryStats()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface grocery-title line-through opacity-70">Lean Turkey Breast Fillets (1.2kg)</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant font-mono">$18.90</span>
+</label>
+<!-- Item 4 -->
+<label class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low cursor-pointer active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded-md accent-tertiary bg-surface-container-high cursor-pointer grocery-item" data-price="12.40" onchange="updateGroceryStats()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface grocery-title">Wild Atlantic Salmon Fillets (400g)</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-on-surface font-mono">$12.40</span>
+</label>
+</div>
+</div>
+<!-- Pantry & Complex Carbs Section -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-data-sm text-label-data-sm text-secondary-fixed uppercase tracking-widest font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">inventory_2</span>
+            Dry Pantry &amp; Oils
+          </span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant/70">Aisle 7 • Grains</span>
+</div>
+<div class="grid grid-cols-1 gap-2">
+<!-- Item 5 -->
+<label class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low cursor-pointer active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded-md accent-tertiary bg-surface-container-high cursor-pointer grocery-item" data-price="3.20" onchange="updateGroceryStats()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface grocery-title">Whole Grain Rolled Oats (1kg)</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-on-surface font-mono">$3.20</span>
+</label>
+<!-- Item 6 -->
+<label class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low cursor-pointer active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded-md accent-tertiary bg-surface-container-high cursor-pointer grocery-item" data-price="4.30" onchange="updateGroceryStats()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface grocery-title">Extra Virgin Cold-Pressed Olive Oil</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-on-surface font-mono">$4.30</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Action & Printable 2026 Plan Export -->
+<section class="flex flex-col gap-2.5">
+<button class="w-full py-3.5 px-4 rounded-full bg-primary-container text-white shadow-xl shadow-primary-container/30 flex items-center justify-center gap-2 font-headline-sm text-headline-sm font-semibold active:scale-[0.98] transition-transform" onclick="triggerExportDelight(this)" type="button">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span>Export Printable 2026 Plan &amp; Weekly PDF</span>
+</button>
+<div class="flex items-center justify-center gap-2 text-center">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified_user</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant">Clean NUTRIPULSE Vector Layout • Auto-Syncs Grocery to Wallet</span>
+</div>
+</section>
+<!-- Toast Micro-Interactions Notification -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-surface-container-highest/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border-none transition-all duration-300 opacity-0 pointer-events-none translate-y-3 max-w-[90vw]" id="export-toast">
+<div class="w-7 h-7 rounded-full bg-tertiary-container flex items-center justify-center text-white flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">2026 Telemetry PDF Ready</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant">Formatted for Supermarket printing &amp; AirDrop</span>
+</div>
+</div>
+</div>
+<script>
+  // Grocery Checklist Interactive Calculations
+  function updateGroceryStats() {
+    const items = document.querySelectorAll('.grocery-item');
+    let totalChecked = 0;
+    let sum = 0;
+
+    items.forEach(item => {
+      const parentLabel = item.closest('label');
+      const titleSpan = parentLabel.querySelector('.grocery-title');
+      const price = parseFloat(item.getAttribute('data-price') || 0);
+
+      if (item.checked) {
+        totalChecked++;
+        titleSpan.classList.add('line-through', 'opacity-70');
+      } else {
+        titleSpan.classList.remove('line-through', 'opacity-70');
+      }
+      sum += price;
+    });
+
+    const totalCount = items.length;
+    const progressPercent = Math.round((totalChecked / totalCount) * 100);
+
+    const checkedCountEl = document.getElementById('checked-count');
+    const progressBar = document.getElementById('cart-progress-bar');
+    const estTotalEl = document.getElementById('est-total');
+
+    if (checkedCountEl) checkedCountEl.textContent = totalChecked;
+    if (progressBar) progressBar.style.width = progressPercent + '%';
+    if (estTotalEl) estTotalEl.textContent = '$' + sum.toFixed(2);
+  }
+
+  // Toggle Batch Cooking Steps
+  function toggleStep(el) {
+    const icon = el.querySelector('.check-icon');
+    const text = el.querySelector('.step-text');
+    const isCompleted = text.classList.contains('line-through');
+
+    if (isCompleted) {
+      text.classList.remove('line-through', 'opacity-70');
+      icon.classList.remove('bg-tertiary', 'text-on-tertiary');
+      icon.classList.add('bg-surface-container-highest', 'text-transparent');
+    } else {
+      text.classList.add('line-through', 'opacity-70');
+      icon.classList.remove('bg-surface-container-highest', 'text-transparent');
+      icon.classList.add('bg-tertiary', 'text-on-tertiary');
+    }
+  }
+
+  // Timer Micro Interaction
+  let timerInterval = null;
+  let remainingSeconds = 45 * 60;
+  let isTimerRunning = false;
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function toggleTimer() {
+    const timerLabel = document.getElementById('timer-label');
+    const prepTimer = document.getElementById('prep-timer');
+    if (!isTimerRunning) {
+      isTimerRunning = true;
+      if (timerLabel) timerLabel.textContent = 'Pause Timer';
+      timerInterval = setInterval(() => {
+        if (remainingSeconds > 0) {
+          remainingSeconds--;
+          if (prepTimer) prepTimer.textContent = formatTime(remainingSeconds);
+        } else {
+          clearInterval(timerInterval);
+          isTimerRunning = false;
+          if (timerLabel) timerLabel.textContent = 'Done!';
+        }
+      }, 1000);
+    } else {
+      isTimerRunning = false;
+      clearInterval(timerInterval);
+      if (timerLabel) timerLabel.textContent = 'Resume Timer';
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    isTimerRunning = false;
+    remainingSeconds = 45 * 60;
+    const prepTimer = document.getElementById('prep-timer');
+    const timerLabel = document.getElementById('timer-label');
+    if (prepTimer) prepTimer.textContent = '45:00';
+    if (timerLabel) timerLabel.textContent = 'Start Timer';
+  }
+
+  // Export Plan Delight Notification
+  function triggerExportDelight(btn) {
+    const originalText = btn.innerHTML;
+    btn.innerHTML = `<span class="material-symbols-outlined text-[20px] animate-spin">refresh</span><span>Compiling NUTRIPULSE Layout...</span>`;
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      const toast = document.getElementById('export-toast');
+      if (toast) {
+        toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+        toast.classList.add('opacity-100', 'translate-y-0');
+
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+          toast.classList.remove('opacity-100', 'translate-y-0');
+        }, 3200);
+      }
+    }, 700);
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-8px_32px_rgba(0,0,0,0.6)]" data-active-classes="text-primary-container drop-shadow-[0_0_12px_rgba(255,87,8,0.5)]"><div class="flex justify-around items-center h-20 px-space-sm"><a class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">vital_signs</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Today</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] -mt-5 group" data-path="ai-scanner" href="#"><div class="w-13 h-13 p-3 rounded-full bg-primary-container text-white shadow-[0_0_24px_rgba(255,87,8,0.45)] flex items-center justify-center transition-transform active:scale-95"><span class="material-symbols-outlined text-[26px]">photo_camera</span></div><span class="font-label-data-sm text-label-data-sm text-on-surface group-hover:text-primary-container font-semibold tracking-wide mt-0.5">Scan AI</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] transition-all text-primary-container drop-shadow-[0_0_12px_rgba(255,87,8,0.5)]" data-path="meal-prep" href="#"><span class="material-symbols-outlined text-[24px]">restaurant_menu</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Meals</span></a><a class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-all" data-path="workout" href="#"><span class="material-symbols-outlined text-[24px]">fitness_center</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Workouts</span></a></div></nav></body></html>

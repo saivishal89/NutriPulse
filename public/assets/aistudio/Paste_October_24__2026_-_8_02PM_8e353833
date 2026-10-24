@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;min-height:100%;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { 'colors': { 'on-secondary-container': '#00424e', 'on-tertiary-container': '#00311f', 'error-container': '#93000a', 'inverse-on-surface': '#2c303a', 'on-secondary-fixed-variant': '#004e5c', 'surface-bright': '#353943', 'secondary-fixed-dim': '#4cd7f6', 'secondary-fixed': '#acedff', 'primary-fixed': '#ffdbcf', 'error': '#ffb4ab', 'surface-container-high': '#262a34', 'tertiary-container': '#00a572', 'surface-tint': '#ffb59c', 'on-secondary': '#003640', 'surface-container-lowest': '#0a0e17', 'secondary': '#4cd7f6', 'tertiary-fixed-dim': '#4edea3', 'surface-container': '#1c1f29', 'on-primary-fixed': '#390c00', 'primary': '#ffb59c', 'surface-dim': '#0f131c', 'on-error-container': '#ffdad6', 'on-primary': '#5c1900', 'surface-container-low': '#181b25', 'primary-fixed-dim': '#ffb59c', 'on-secondary-fixed': '#001f26', 'outline-variant': '#5c4037', 'inverse-surface': '#dfe2ef', 'on-surface': '#dfe2ef', 'on-tertiary-fixed-variant': '#005236', 'surface-container-highest': '#31353f', 'on-primary-container': '#511500', 'on-primary-fixed-variant': '#822700', 'on-tertiary': '#003824', 'tertiary': '#4edea3', 'on-error': '#690005', 'on-surface-variant': '#e5beb2', 'primary-container': '#ff5708', 'secondary-container': '#03b5d3', 'on-background': '#dfe2ef', 'on-tertiary-fixed': '#002113', 'outline': '#ac897e', 'surface': '#0f131c', 'background': '#0f131c', 'inverse-primary': '#aa3600', 'surface-variant': '#31353f', 'tertiary-fixed': '#6ffbbe' }, 'borderRadius': { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, 'spacing': { 'space-md': '1rem', 'space-xs': '0.25rem', 'margin-tablet': '2rem', 'gutter': '1rem', 'margin-desktop': '3rem', 'space-lg': '1.5rem', 'gutter-sm': '0.75rem', 'space-sm': '0.5rem', 'space-xl': '2rem', 'margin': '1.25rem' }, 'fontFamily': { 'headline-md': ['Sora'], 'label-data-lg': ['JetBrains Mono'], 'headline-lg': ['Sora'], 'body-sm': ['Plus Jakarta Sans'], 'body-md': ['Plus Jakarta Sans'], 'display-lg-mobile': ['Sora'], 'headline-sm': ['Sora'], 'label-data-md': ['JetBrains Mono'], 'body-lg': ['Plus Jakarta Sans'], 'label-data-sm': ['JetBrains Mono'], 'display-lg': ['Sora'] }, 'fontSize': { 'headline-md': ['22px', { 'lineHeight': '28px', 'letterSpacing': '-0.01em', 'fontWeight': '600' }], 'label-data-lg': ['16px', { 'lineHeight': '20px', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'headline-lg': ['28px', { 'lineHeight': '36px', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'body-sm': ['12px', { 'lineHeight': '16px', 'fontWeight': '400' }], 'body-md': ['14px', { 'lineHeight': '20px', 'fontWeight': '400' }], 'display-lg-mobile': ['32px', { 'lineHeight': '40px', 'letterSpacing': '-0.02em', 'fontWeight': '700' }], 'headline-sm': ['18px', { 'lineHeight': '24px', 'fontWeight': '600' }], 'label-data-md': ['12px', { 'lineHeight': '16px', 'letterSpacing': '0.02em', 'fontWeight': '500' }], 'body-lg': ['16px', { 'lineHeight': '24px', 'fontWeight': '400' }], 'label-data-sm': ['10px', { 'lineHeight': '14px', 'letterSpacing': '0.04em', 'fontWeight': '500' }], 'display-lg': ['40px', { 'lineHeight': '48px', 'letterSpacing': '-0.03em', 'fontWeight': '700' }] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-primary-container selection:text-white"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.4)]"><div class="h-20 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><img alt="NutriPulse Brand Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1U9r5NiLqOdPFUe8L1NaZvB1i9_O15h56WBEn1rQ58XtIjqYlmJKfg5GeSWaRIkZCzdEswFVsLkh71Fcdr_bTnU27gpEApyX15ESg6EX9qUl92sxAGVp57RA-oHrHk9C24XpOLElRFPr31xZD9A8TskV3JiqulTINzLBqNJk0PhIjVDV1AEbK8LQZk_5-x3CEkOJv4qX8FaTQMERdxAIn66tGjM3pd8waiqNt0WkK3Yxv10StKH3wT7j1M"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-on-surface truncate">NUTRIPULSE</span></div><span class="font-label-data-sm text-label-data-sm text-on-surface-variant/70 uppercase tracking-wider truncate">PRO PLANNER • AI Diet &amp; Workout Engine</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><div class="hidden sm:flex items-center gap-1 bg-surface-container-high/60 backdrop-blur-md px-2 py-1 rounded-full"><span class="text-xs">🔥</span><span class="font-label-data-sm text-label-data-sm text-primary-fixed">14 Days</span></div><div class="flex items-center gap-1 bg-surface-container-high/60 backdrop-blur-md px-2.5 py-1 rounded-full"><span class="text-xs">💧</span><span class="font-label-data-sm text-label-data-sm text-secondary-fixed-dim">1.8L</span></div><button aria-label="Profile" class="w-11 h-11 flex items-center justify-center rounded-full ml-space-xs" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb2ue5lZRjOfMrvJlciQU227i0Fu-b70BJhGAbz03zfPq_1VfLTnFVu0xFBogjKAJWq5TF5vUS8t-tvwLE1FDPy6byLcahR980RwJGR74xvan5lECPnr4Qn9W9BX01oZHhzmmgVJjhIoyU7MKz8YhZvK7-UsV7_qeaCuPk01ta7c7J4pProRh-FoYf90tf0S8gltW6obRNkvvDaUT1LKRpjM2tRjMnh39KkYuM6xUcRZdAN6pK1Nvv0A"/></button></div></div></header><main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin pb-6 gap-y-space-md">
+<!-- Workout Routine Header Banner -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-high p-space-md shadow-lg">
+<div class="absolute -right-8 -bottom-8 w-36 h-36 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between gap-space-sm relative z-10">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-data-sm text-label-data-sm font-semibold uppercase tracking-wider">
+            Live Session
+          </span>
+<span class="inline-flex items-center gap-1 text-on-surface-variant font-label-data-sm text-label-data-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+            25 Min
+          </span>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface truncate">Hypertrophy Push Split</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Chest, Shoulders &amp; Triceps Focus</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-transform flex-shrink-0" id="routine-info-toggle">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Live Telemetry HUD Deck -->
+<div class="grid grid-cols-3 gap-space-sm">
+<!-- Rest Countdown Timer with subtle audio ring toggle -->
+<div class="flex flex-col items-center justify-center p-space-sm rounded-xl bg-surface-container backdrop-blur-md shadow-md text-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[14px] text-primary">timer</span>
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wide">Rest Timer</span>
+</div>
+<div class="flex items-baseline justify-center gap-0.5">
+<span class="font-label-data-lg text-label-data-lg text-primary font-bold tracking-tight" id="countdown-display">01:15</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<button class="flex items-center gap-1 text-on-surface-variant/80 hover:text-primary transition-colors text-left" id="sound-toggle-btn" title="Audio Cues Active">
+<span class="material-symbols-outlined text-[13px] text-primary" id="sound-icon">volume_up</span>
+<span class="font-label-data-sm text-label-data-sm text-[10px]">Beep ON</span>
+</button>
+</div>
+</div>
+<!-- Heart Rate Telemetry -->
+<div class="flex flex-col items-center justify-center p-space-sm rounded-xl bg-surface-container backdrop-blur-md shadow-md text-center relative overflow-hidden">
+<div class="absolute inset-0 bg-secondary-container/5 pointer-events-none"></div>
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[14px] text-secondary animate-pulse">favorite</span>
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wide">Pulse</span>
+</div>
+<div class="flex items-baseline justify-center gap-1">
+<span class="font-label-data-lg text-label-data-lg text-secondary font-bold">138</span>
+<span class="font-label-data-sm text-label-data-sm text-secondary-fixed-dim">BPM</span>
+</div>
+<span class="mt-1 px-1.5 py-0.2 rounded bg-secondary/10 text-secondary font-label-data-sm text-[9px] uppercase tracking-wider font-semibold">
+        Aerobic Cyan
+      </span>
+</div>
+<!-- Active Set Counter Tracker -->
+<div class="flex flex-col items-center justify-center p-space-sm rounded-xl bg-surface-container backdrop-blur-md shadow-md text-center relative overflow-hidden">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">repeat</span>
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wide">Current</span>
+</div>
+<div class="flex items-baseline justify-center gap-1">
+<span class="font-label-data-lg text-label-data-lg text-on-surface font-bold">Set 3</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant">/ 4</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full w-3/4"></div>
+</div>
+</div>
+</div>
+<!-- Active Exercise & Routine List -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wider text-on-surface-variant">Prescribed Movements</span>
+<span class="font-label-data-sm text-label-data-sm text-primary font-medium">3 Exercises</span>
+</div>
+<!-- Exercise 1: Incline Dumbbell Bench Press (Active & In Progress) -->
+<div class="rounded-xl bg-surface-container-high p-space-md shadow-md relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-container via-primary to-secondary"></div>
+<div class="flex items-start gap-space-sm">
+<div class="w-16 h-16 rounded-lg bg-surface-container-lowest overflow-hidden flex-shrink-0 relative shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Athletic male in athletic apparel performing high-form incline dumbbell bench press in a futuristic dark gymnasium with fiery neon accent lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL-2tNdCEADJBCL3H5bY2O4KgDc4HDxIP9qMHhYMn0VfnsTJNbKFiq5GEd06CvQE_tCQ4CQT8xMOnFqIixj8pxx2GPQJTJYHdR6KauQmmWpjRdCj43t0NFlTAfu0OSybxnsRlySXEvLlDJ0BBw2mP5NFUthOGx1Gy6nQpM_D-8KmhPlEgaWujdqHZs2hXWXze9yaJWWVMu1mfgJHuMMh6op3QgAs3Qn_MoRQgHRb9waMttZbVmOB_vRA"/>
+<div class="absolute bottom-0 inset-x-0 bg-primary-container/90 text-white font-label-data-sm text-[9px] text-center font-bold py-0.5 uppercase">
+            Active
+          </div>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<h2 class="font-headline-sm text-[16px] leading-5 text-on-surface font-semibold truncate">Incline DB Bench Press</h2>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-data-sm text-label-data-sm font-semibold">Chest 45°</span>
+</div>
+<div class="flex items-center gap-space-sm mt-1 text-on-surface-variant font-label-data-sm text-label-data-sm">
+<span>Target: <strong class="text-on-surface font-semibold">32kg × 10 reps</strong></span>
+<span>•</span>
+<span class="text-tertiary">4 Sets</span>
+</div>
+<!-- Set Visual Interactive Chips -->
+<div class="grid grid-cols-4 gap-1.5 mt-3">
+<!-- Set 1: Done -->
+<button class="set-chip flex flex-col items-center justify-center py-1.5 rounded-lg bg-tertiary-container/20 text-tertiary hover:opacity-90 transition-all">
+<span class="font-label-data-sm text-[10px] font-bold">SET 1</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary font-bold" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<!-- Set 2: Done -->
+<button class="set-chip flex flex-col items-center justify-center py-1.5 rounded-lg bg-tertiary-container/20 text-tertiary hover:opacity-90 transition-all">
+<span class="font-label-data-sm text-[10px] font-bold">SET 2</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary font-bold" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<!-- Set 3: Completed ✓ just now -->
+<button class="set-chip flex flex-col items-center justify-center py-1.5 rounded-lg bg-tertiary-container/20 text-tertiary shadow-sm transition-all" id="set-3-chip">
+<span class="font-label-data-sm text-[10px] font-bold">SET 3</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary font-bold" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<!-- Set 4: In Progress -->
+<button class="set-chip flex flex-col items-center justify-center py-1.5 rounded-lg bg-primary-container text-white shadow-[0_0_12px_rgba(255,87,8,0.4)] transition-all animate-pulse" id="set-4-chip">
+<span class="font-label-data-sm text-[10px] font-bold">SET 4</span>
+<span class="font-label-data-sm text-[11px] font-bold">GO!</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Exercise 2: Cable Lateral Raises (Queued) -->
+<div class="rounded-xl bg-surface-container p-space-md shadow-sm relative overflow-hidden transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-space-sm">
+<div class="w-14 h-14 rounded-lg bg-surface-container-lowest overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover opacity-80" data-alt="Female power athlete executing dual cable lateral raises with precision mechanics in an atmospheric dark modern biomechanics weight gym." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMv6jnBCXc7wvY9m1nVmbJwnAlHvYkQ7r3Bm6eoftX5Il-Fc0pm00dSCFfaUbqZFQ2y6PDEIazG0UfepS239P8xjm49VwBu53hVh7ff5pav5FkdpMykPDoaryKXdnyIwOCK6Qz-4IBmdeqwazxyTMCxmBqeMhho83O1zPuRJ4zZ8giJCgOFdWl2Pl3Rqm8VEo3_DtHEo_TBaP0TqvRPjjvffTIXI3NqIJtn0WxprJ2oMfDzcxo1DOsbg"/>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-headline-sm text-[15px] leading-5 text-on-surface truncate">Cable Lateral Raises</h3>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant font-medium">Up Next</span>
+</div>
+<div class="flex items-center gap-space-sm mt-1 text-on-surface-variant font-label-data-sm text-label-data-sm">
+<span>Target: <strong class="text-on-surface">12kg × 15 reps</strong></span>
+<span>•</span>
+<span>3 Sets</span>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-transform flex-shrink-0" title="Quick Preview">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Exercise 3: Overhead Triceps Rope Extension (Queued) -->
+<div class="rounded-xl bg-surface-container p-space-md shadow-sm relative overflow-hidden transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-space-sm">
+<div class="w-14 h-14 rounded-lg bg-surface-container-lowest overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover opacity-80" data-alt="Muscular male bodybuilder performing overhead triceps rope extension with crisp lockout in a cinematic low-key fitness studio with orange edge lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLU5DTWtHM1Y4S2j_EoWwMCT9q90bUh6-TCSeLumX99Xaq4QpR02L1ad9StYjZuCd9NTMXFJIiMOIM1FEpwBkNOREsfevoqwae5GL1lZj3sLjFd8ILk09_Fx9WabFIGAcQaEtlVDJ5OdmHnn_wgu6VBjWKiCExG-a_D5GAtMjqZNHZHmBPqM5oGU2guF37ggMyp135_swEAq3l-k7Eep3QXuIKWBkAeDD8lFO9vJktJm1fiyjKGDv_Aw"/>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-headline-sm text-[15px] leading-5 text-on-surface truncate">Overhead Triceps Rope Ext.</h3>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant font-medium">Final Finisher</span>
+</div>
+<div class="flex items-center gap-space-sm mt-1 text-on-surface-variant font-label-data-sm text-label-data-sm">
+<span>Target: <strong class="text-on-surface">25kg × 12 reps</strong></span>
+<span>•</span>
+<span>3 Sets</span>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-transform flex-shrink-0" title="Quick Preview">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Real-Time Workout Control Console -->
+<div class="rounded-xl bg-surface-container-high p-space-md shadow-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-data-sm text-label-data-sm uppercase tracking-wide text-on-surface-variant">Active Command</span>
+<span class="font-label-data-sm text-label-data-sm text-primary font-bold">Live Synced</span>
+</div>
+<div class="grid grid-cols-3 gap-space-sm">
+<!-- Pause / Resume Session Button -->
+<button class="flex flex-col items-center justify-center gap-1 py-3 px-2 rounded-xl bg-surface-container hover:bg-surface-container-highest text-on-surface transition-all active:scale-95 shadow-sm" id="pause-btn">
+<span class="material-symbols-outlined text-[24px] text-on-surface" id="pause-icon">pause_circle</span>
+<span class="font-label-data-sm text-label-data-sm font-semibold" id="pause-text">Pause</span>
+</button>
+<!-- Log Weight & Reps Trigger -->
+<button class="flex flex-col items-center justify-center gap-1 py-3 px-2 rounded-xl bg-surface-container hover:bg-surface-container-highest text-secondary transition-all active:scale-95 shadow-sm" id="log-trigger-btn">
+<span class="material-symbols-outlined text-[24px] text-secondary">edit_note</span>
+<span class="font-label-data-sm text-label-data-sm font-semibold">Log Set</span>
+</button>
+<!-- Complete Set / Advance Exercise -->
+<button class="flex flex-col items-center justify-center gap-1 py-3 px-2 rounded-xl bg-primary-container text-white shadow-[0_4px_16px_rgba(255,87,8,0.4)] hover:brightness-110 active:scale-95 transition-all" id="next-ex-btn">
+<span class="material-symbols-outlined text-[24px]">skip_next</span>
+<span class="font-label-data-sm text-label-data-sm font-semibold">Next Move</span>
+</button>
+</div>
+<!-- Quick Inline Rep & Load Micro-Adjustment Form (Collapsible/Dynamic) -->
+<div class="hidden flex-col gap-space-sm pt-space-sm border-t-0 mt-1" id="quick-log-drawer">
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-data-sm text-[11px] text-on-surface-variant uppercase">Weight (KG)</label>
+<div class="flex items-center bg-surface-container-lowest rounded-lg p-1.5 shadow-inner">
+<button class="w-8 h-8 rounded bg-surface-container text-on-surface flex items-center justify-center active:scale-95 font-bold" id="weight-minus">-</button>
+<input class="w-full text-center bg-transparent text-on-surface font-label-data-md text-label-data-md font-semibold focus:outline-none" id="weight-val" type="number" value="32"/>
+<button class="w-8 h-8 rounded bg-surface-container text-on-surface flex items-center justify-center active:scale-95 font-bold" id="weight-plus">+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-data-sm text-[11px] text-on-surface-variant uppercase">Reps Done</label>
+<div class="flex items-center bg-surface-container-lowest rounded-lg p-1.5 shadow-inner">
+<button class="w-8 h-8 rounded bg-surface-container text-on-surface flex items-center justify-center active:scale-95 font-bold" id="reps-minus">-</button>
+<input class="w-full text-center bg-transparent text-on-surface font-label-data-md text-label-data-md font-semibold focus:outline-none" id="reps-val" type="number" value="10"/>
+<button class="w-8 h-8 rounded bg-surface-container text-on-surface flex items-center justify-center active:scale-95 font-bold" id="reps-plus">+</button>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-lg bg-tertiary-container text-white font-headline-sm text-[14px] flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-all" id="confirm-log-btn">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+        Confirm &amp; Start Rest
+      </button>
+</div>
+</div>
+<!-- Post-Session Biometric Forecast Card -->
+<div class="rounded-xl bg-surface-container p-space-md shadow-md relative overflow-hidden">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[20px] text-primary-container">local_fire_department</span>
+<span class="font-headline-sm text-[15px] text-on-surface font-semibold">Post-Session Estimate</span>
+</div>
+<span class="font-label-data-sm text-label-data-sm text-tertiary uppercase tracking-wider font-semibold">EPOC Active</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-high/70 shadow-inner">
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase">Projected Burn</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-display-lg-mobile text-[26px] leading-tight text-primary font-bold">285</span>
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant font-semibold">kCal</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant/80 mt-0.5">High metabolic demand</span>
+</div>
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-high/70 shadow-inner">
+<span class="font-label-data-sm text-label-data-sm text-on-surface-variant uppercase">Metabolic Surge</span>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="material-symbols-outlined text-[22px] text-tertiary font-bold">bolt</span>
+<span class="font-headline-sm text-headline-sm text-tertiary font-bold tracking-tight">HIGH</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant/80 mt-0.5">+48hr afterburn zone</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function () {
+    // Rest Countdown Logic
+    let totalSeconds = 75; // 01:15
+    let isRunning = true;
+    let soundEnabled = true;
+    const countdownEl = document.getElementById('countdown-display');
+    const soundToggle = document.getElementById('sound-toggle-btn');
+    const soundIcon = document.getElementById('sound-icon');
+    const pauseBtn = document.getElementById('pause-btn');
+    const pauseIcon = document.getElementById('pause-icon');
+    const pauseText = document.getElementById('pause-text');
+
+    const updateTimerDisplay = () => {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      countdownEl.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    };
+
+    const playBeep = () => {
+      if (!soundEnabled) return;
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch motivational blip
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.15);
+      } catch (e) {
+        // AudioContext not allowed or unsupported
+      }
+    };
+
+    const timerInterval = setInterval(() => {
+      if (isRunning && totalSeconds > 0) {
+        totalSeconds--;
+        updateTimerDisplay();
+        if (totalSeconds <= 3 && totalSeconds > 0) {
+          playBeep();
+        } else if (totalSeconds === 0) {
+          playBeep();
+          countdownEl.classList.add('text-tertiary');
+        }
+      }
+    }, 1000);
+
+    // Audio cue toggle
+    soundToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        soundIcon.textContent = 'volume_up';
+        soundIcon.classList.remove('text-on-surface-variant');
+        soundIcon.classList.add('text-primary');
+        soundToggle.querySelector('span:last-child').textContent = 'Beep ON';
+      } else {
+        soundIcon.textContent = 'volume_off';
+        soundIcon.classList.remove('text-primary');
+        soundIcon.classList.add('text-on-surface-variant');
+        soundToggle.querySelector('span:last-child').textContent = 'Muted';
+      }
+    });
+
+    // Pause/Resume Workout toggle
+    pauseBtn.addEventListener('click', () => {
+      isRunning = !isRunning;
+      if (!isRunning) {
+        pauseIcon.textContent = 'play_circle';
+        pauseText.textContent = 'Resume';
+        pauseBtn.classList.add('bg-primary-container/20', 'text-primary');
+      } else {
+        pauseIcon.textContent = 'pause_circle';
+        pauseText.textContent = 'Pause';
+        pauseBtn.classList.remove('bg-primary-container/20', 'text-primary');
+      }
+    });
+
+    // Drawer Toggle for Log Set
+    const logTriggerBtn = document.getElementById('log-trigger-btn');
+    const logDrawer = document.getElementById('quick-log-drawer');
+    const confirmLogBtn = document.getElementById('confirm-log-btn');
+
+    logTriggerBtn.addEventListener('click', () => {
+      if (logDrawer.classList.contains('hidden')) {
+        logDrawer.classList.remove('hidden');
+        logDrawer.classList.add('flex');
+      } else {
+        logDrawer.classList.add('hidden');
+        logDrawer.classList.remove('flex');
+      }
+    });
+
+    // Value increments/decrements
+    const weightVal = document.getElementById('weight-val');
+    const repsVal = document.getElementById('reps-val');
+
+    document.getElementById('weight-plus').addEventListener('click', () => {
+      weightVal.value = (parseFloat(weightVal.value) || 0) + 2;
+    });
+    document.getElementById('weight-minus').addEventListener('click', () => {
+      const v = (parseFloat(weightVal.value) || 0) - 2;
+      weightVal.value = Math.max(0, v);
+    });
+    document.getElementById('reps-plus').addEventListener('click', () => {
+      repsVal.value = (parseInt(repsVal.value, 10) || 0) + 1;
+    });
+    document.getElementById('reps-minus').addEventListener('click', () => {
+      const v = (parseInt(repsVal.value, 10) || 0) - 1;
+      repsVal.value = Math.max(1, v);
+    });
+
+    // Set 4 Check-off delight interaction
+    const set4Chip = document.getElementById('set-4-chip');
+    confirmLogBtn.addEventListener('click', () => {
+      // Complete current active set animation
+      set4Chip.classList.remove('bg-primary-container', 'animate-pulse');
+      set4Chip.classList.add('bg-tertiary-container/20', 'text-tertiary');
+      set4Chip.innerHTML = `
+        <span class="font-label-data-sm text-[10px] font-bold">SET 4</span>
+        <span class="material-symbols-outlined text-[16px] text-tertiary font-bold" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+      `;
+      // Reset timer
+      totalSeconds = 90;
+      updateTimerDisplay();
+      logDrawer.classList.add('hidden');
+      logDrawer.classList.remove('flex');
+      playBeep();
+    });
+
+    // Next Exercise button feedback
+    const nextExBtn = document.getElementById('next-ex-btn');
+    nextExBtn.addEventListener('click', () => {
+      totalSeconds = 60;
+      updateTimerDisplay();
+      nextExBtn.classList.add('scale-95');
+      setTimeout(() => nextExBtn.classList.remove('scale-95'), 150);
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-8px_32px_rgba(0,0,0,0.6)]" data-active-classes="text-primary-container drop-shadow-[0_0_12px_rgba(255,87,8,0.5)]"><div class="flex justify-around items-center h-20 px-space-sm"><a class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">vital_signs</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Today</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] -mt-5 group" data-path="ai-scanner" href="#"><div class="w-13 h-13 p-3 rounded-full bg-primary-container text-white shadow-[0_0_24px_rgba(255,87,8,0.45)] flex items-center justify-center transition-transform active:scale-95"><span class="material-symbols-outlined text-[26px]">photo_camera</span></div><span class="font-label-data-sm text-label-data-sm text-on-surface group-hover:text-primary-container font-semibold tracking-wide mt-0.5">Scan AI</span></a><a class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-all" data-path="meal-prep" href="#"><span class="material-symbols-outlined text-[24px]">restaurant_menu</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Meals</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] transition-all text-primary-container drop-shadow-[0_0_12px_rgba(255,87,8,0.5)]" data-path="workout" href="#"><span class="material-symbols-outlined text-[24px]">fitness_center</span><span class="font-label-data-sm text-label-data-sm font-semibold tracking-wide">Workouts</span></a></div></nav></body></html>

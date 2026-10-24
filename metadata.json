@@ -1,0 +1,6 @@
+{
+  "name": "NutriPulse - AI Diet & Workout Tracker",
+  "description": "All-in-one personalized meal prep, food photo nutrition scanner, calorie & macro monitoring, hydration tracker with reminders, and custom workout plans.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
