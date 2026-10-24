@@ -216,44 +216,74 @@ export const InstallAppModal: React.FC<InstallAppModalProps> = ({ isOpen, onClos
           {/* TAB 2: Standalone .APK File Generation */}
           {activeTab === 'apk' && (
             <div className="space-y-4">
-              <div className="p-4 rounded-xl bg-[#161a24] border border-blue-500/20">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Terminal className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-white text-sm">
-                      Need a raw standalone <code className="text-blue-300">.apk</code> file?
-                    </h4>
-                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                      Google's official <strong>Bubblewrap CLI</strong> turns this PWA manifest into a release-ready Android APK in one terminal command:
-                    </p>
-                  </div>
+              {/* Notice about external crawlers */}
+              <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-start gap-2.5">
+                <span className="text-base flex-shrink-0">⚠️</span>
+                <div>
+                  <strong className="text-amber-200">Why online builders (PWABuilder / Bubblewrap) show 403 Forbidden:</strong>
+                  <p className="text-amber-300/80 mt-1 leading-relaxed">
+                    AI Studio's preview URL (<code className="bg-black/30 px-1 py-0.5 rounded">*.run.app</code>) is a secure, private cloud environment. External bots cannot crawl it automatically without Google credentials.
+                  </p>
                 </div>
+              </div>
 
-                {/* Terminal Snippet 1 */}
-                <div className="mt-4 bg-black/60 rounded-xl p-3 border border-white/10 font-mono text-xs text-emerald-400 space-y-1">
-                  <div className="text-slate-500"># 1. Initialize Android package from PWA manifest</div>
-                  <div className="text-white">
-                    npx @bubblewrap/cli init --manifest={currentUrl}/manifest.webmanifest
-                  </div>
-                  <div className="text-slate-500 mt-2"># 2. Build signed nutripulse.apk</div>
-                  <div className="text-white">
-                    npx @bubblewrap/cli build
-                  </div>
+              {/* Direct Assets Download */}
+              <div className="p-4 rounded-xl bg-[#161a24] border border-white/10 space-y-3">
+                <h4 className="font-semibold text-white text-sm flex items-center gap-2">
+                  <Download className="w-4 h-4 text-emerald-400" />
+                  <span>Download APK Ready Assets (1-Click)</span>
+                </h4>
+                <p className="text-xs text-slate-400">
+                  Save these files to your computer to upload directly into PWABuilder or Android Studio:
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                  <a
+                    href="/manifest.json"
+                    download="manifest.json"
+                    className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-center transition flex flex-col items-center justify-center gap-1 cursor-pointer"
+                  >
+                    <span className="font-mono text-xs font-bold text-white">manifest.json</span>
+                    <span className="text-[10px] text-slate-400">PWA Manifest</span>
+                  </a>
+                  <a
+                    href="/pwa-512x512.png"
+                    download="icon-512x512.png"
+                    className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-center transition flex flex-col items-center justify-center gap-1 cursor-pointer"
+                  >
+                    <span className="font-mono text-xs font-bold text-white">512×512 Icon</span>
+                    <span className="text-[10px] text-slate-400">App Store PNG</span>
+                  </a>
+                  <a
+                    href="/pwa-192x192.png"
+                    download="icon-192x192.png"
+                    className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-center transition flex flex-col items-center justify-center gap-1 cursor-pointer"
+                  >
+                    <span className="font-mono text-xs font-bold text-white">192×192 Icon</span>
+                    <span className="text-[10px] text-slate-400">Launcher PNG</span>
+                  </a>
                 </div>
+              </div>
+
+              {/* PWABuilder Direct upload instructions */}
+              <div className="p-4 rounded-xl bg-[#161a24] border border-blue-500/20 space-y-2">
+                <h4 className="font-semibold text-white text-sm flex items-center gap-2">
+                  <Terminal className="w-4 h-4 text-blue-400" />
+                  <span>How to Package in PWABuilder without 403:</span>
+                </h4>
+                <ol className="text-xs text-slate-300 space-y-1.5 list-decimal list-inside leading-relaxed">
+                  <li>In PWABuilder, click <strong>"Manifest Options"</strong>.</li>
+                  <li>Under <strong>Icons</strong>, click <strong>"Upload Image"</strong> and select the downloaded <code className="text-white">icon-512x512.png</code>.</li>
+                  <li>Click <strong>"Package for Android"</strong> → PWABuilder will now compile your APK without trying to crawl the protected Cloud Run URL!</li>
+                </ol>
               </div>
 
               {/* Capacitor Alternative */}
               <div className="p-4 rounded-xl bg-[#161a24] border border-white/5 space-y-2">
                 <h5 className="text-xs font-semibold text-white flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  Alternative: Capacitor Android Studio project
+                  Local Android Studio Build (Capacitor)
                 </h5>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  If you prefer compiling directly through Android Studio:
-                </p>
-                <div className="bg-black/60 rounded-xl p-3 border border-white/10 font-mono text-xs text-slate-200">
+                <div className="bg-black/60 rounded-xl p-3 border border-white/10 font-mono text-xs text-slate-200 space-y-1">
                   <div>npm install @capacitor/core @capacitor/cli @capacitor/android</div>
                   <div>npx cap init NutriPulse com.nutripulse.app</div>
                   <div>npm run build && npx cap add android</div>

@@ -7,7 +7,6 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 dotenv.config();
-process.env.DISABLE_HMR = 'true';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,6 +17,19 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 // Increase payload limit for photo uploads
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
+
+// Explicitly serve Web Manifest with CORS for Bubblewrap and Web-to-APK converters
+app.get('/manifest.webmanifest', (_req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'application/manifest+json; charset=utf-8');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  return res.sendFile(path.resolve(__dirname, 'public', 'manifest.webmanifest'));
+});
+
+app.get('/manifest.json', (_req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'application/manifest+json; charset=utf-8');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  return res.sendFile(path.resolve(__dirname, 'public', 'manifest.json'));
+});
 
 // Initialize Google GenAI client
 const apiKey = process.env.GEMINI_API_KEY || '';

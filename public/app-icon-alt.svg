@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Outer Dark Gradient -->
+    <radialGradient id="bgRadial" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#192033"/>
+      <stop offset="60%" stop-color="#0e1320"/>
+      <stop offset="100%" stop-color="#070a12"/>
+    </radialGradient>
+
+    <!-- Fiery Blaze Core Shield -->
+    <linearGradient id="shieldGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ff8c42"/>
+      <stop offset="45%" stop-color="#ff5708"/>
+      <stop offset="100%" stop-color="#d93b00"/>
+    </linearGradient>
+
+    <!-- Metabolic Cyan Pulse Accents -->
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4cd7f6"/>
+      <stop offset="100%" stop-color="#00a8cc"/>
+    </linearGradient>
+
+    <!-- Shadow and Glow Filters -->
+    <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#ff5708" flood-opacity="0.45"/>
+    </filter>
+
+    <filter id="boltGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base Frame -->
+  <rect x="16" y="16" width="480" height="480" rx="110" fill="url(#bgRadial)" stroke="#ffffff" stroke-width="2" stroke-opacity="0.12"/>
+
+  <!-- Subtle Concentric Athletic Caliper Circles -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.05" stroke-dasharray="6 8"/>
+  <circle cx="256" cy="256" r="185" fill="none" stroke="#ff5708" stroke-width="1.5" stroke-opacity="0.15"/>
+
+  <!-- Dynamic Diamond Core Shield with Shadow -->
+  <g filter="url(#shieldShadow)">
+    <path d="M 256 76 L 436 256 L 256 436 L 76 256 Z" 
+          fill="url(#shieldGrad)" 
+          stroke="#ffeedd" 
+          stroke-width="5" 
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- Cyan High-Performance Metabolic Tag -->
+  <circle cx="360" cy="152" r="12" fill="url(#cyanAccent)" filter="url(#boltGlow)"/>
+  <circle cx="152" cy="360" r="8" fill="#ffffff" opacity="0.8"/>
+
+  <!-- High-Energy ECG Pulse & Lightning Bolt Monogram (White Core) -->
+  <g filter="url(#boltGlow)">
+    <path d="M 120 256 
+             L 190 256 
+             L 215 300 
+             L 256 128 
+             L 292 368 
+             L 325 256 
+             L 392 256" 
+          fill="none" 
+          stroke="#ffffff" 
+          stroke-width="22" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- Sharp Inner Lightning Cutout Notch -->
+  <polygon points="256,150 268,230 248,230" fill="#ffffff" opacity="0.9"/>
+</svg>
