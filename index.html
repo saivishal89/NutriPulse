@@ -1,6 +1,30 @@
 <!doctype html>
 <html lang="en" class="dark">
   <head>
+    <script>
+      (function() {
+        const origConsoleError = console.error;
+        console.error = function(...args) {
+          const msg = args.map(a => (a && a.message) ? a.message : String(a)).join(' ');
+          if (msg.includes('WebSocket closed without opened') || msg.includes('WebSocket connection')) {
+            return;
+          }
+          origConsoleError.apply(console, args);
+        };
+        window.addEventListener('unhandledrejection', function(e) {
+          const reason = (e && e.reason && e.reason.message) || String(e.reason || '');
+          if (reason.includes('WebSocket closed without opened')) {
+            e.preventDefault();
+          }
+        });
+        window.addEventListener('error', function(e) {
+          const msg = (e && e.message) || '';
+          if (msg.includes('WebSocket closed without opened')) {
+            e.preventDefault();
+          }
+        });
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NutriPulse - AI Diet & Workout Tracker</title>

@@ -25,6 +25,7 @@ interface WaterTrackerProps {
   onResetWater: () => void;
   onToggleReminder: (id: string) => void;
   onUpdateReminderTime: (id: string, newTime: string) => void;
+  onOpenNotificationCenter?: () => void;
 }
 
 export const WaterTracker: React.FC<WaterTrackerProps> = ({
@@ -35,6 +36,7 @@ export const WaterTracker: React.FC<WaterTrackerProps> = ({
   onResetWater,
   onToggleReminder,
   onUpdateReminderTime,
+  onOpenNotificationCenter,
 }) => {
   const [customMl, setCustomMl] = useState(250);
   const [activeNotification, setActiveNotification] = useState<string | null>(null);
@@ -60,7 +62,18 @@ export const WaterTracker: React.FC<WaterTrackerProps> = ({
   };
 
   const handleSimulateReminder = (reminder: WaterReminder) => {
-    sounds.playTimerBeep(true);
+    sounds.playNotificationChime();
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try { navigator.vibrate([150, 80, 150]); } catch (e) {}
+    }
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+      try {
+        new Notification(`💧 Hydration: ${reminder.label}`, {
+          body: `Time for a refill! Drink ${reminder.amountMl}ml to stay on track.`,
+          icon: '/pwa-192x192.png',
+        });
+      } catch (e) {}
+    }
     setActiveNotification(`💧 Reminder: ${reminder.label} (+${reminder.amountMl}ml)`);
     setTimeout(() => {
       setActiveNotification(null);
@@ -313,15 +326,27 @@ export const WaterTracker: React.FC<WaterTrackerProps> = ({
             </p>
           </div>
 
-          {notificationPermission !== 'granted' && (
-            <button
-              onClick={requestNotificationPermission}
-              className="bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-orange-400 font-bold text-xs py-2 px-3 rounded-xl flex items-center gap-1.5 transition-colors shrink-0"
-            >
-              <Bell className="w-3.5 h-3.5" />
-              <span>Enable Browser Alerts</span>
-            </button>
-          )}
+          <div className="flex items-center gap-2 shrink-0 flex-wrap">
+            {onOpenNotificationCenter && (
+              <button
+                onClick={onOpenNotificationCenter}
+                className="bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 font-bold text-xs py-2 px-3 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <BellRing className="w-3.5 h-3.5" />
+                <span>Configure All Reminders</span>
+              </button>
+            )}
+
+            {notificationPermission !== 'granted' && (
+              <button
+                onClick={requestNotificationPermission}
+                className="bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-orange-400 font-bold text-xs py-2 px-3 rounded-xl flex items-center gap-1.5 transition-colors shrink-0 cursor-pointer"
+              >
+                <Bell className="w-3.5 h-3.5" />
+                <span>Enable Phone Alerts</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Reminders List */}

@@ -9,7 +9,8 @@ import {
   BarChart3, 
   Award,
   Sparkles,
-  Zap
+  Zap,
+  Bell
 } from 'lucide-react';
 import { User } from 'firebase/auth';
 import { UserProfile, StreakState, WaterLog } from '../types';
@@ -26,6 +27,8 @@ interface HeaderProps {
   currentUser: User | null;
   onUserChanged: (user: User | null) => void;
   onOpenProfile: () => void;
+  onOpenNotifications: () => void;
+  unreadNotificationCount?: number;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -37,6 +40,8 @@ export const Header: React.FC<HeaderProps> = ({
   currentUser,
   onUserChanged,
   onOpenProfile,
+  onOpenNotifications,
+  unreadNotificationCount = 0,
 }) => {
   const tabs = [
     { id: 'dashboard', label: 'Today', icon: BarChart3, symbol: 'vital_signs' },
@@ -120,6 +125,21 @@ export const Header: React.FC<HeaderProps> = ({
                   </span>
                 </div>
               </div>
+            </button>
+
+            {/* Notification Bell Button */}
+            <button
+              onClick={onOpenNotifications}
+              className="relative p-2 rounded-xl bg-[#1c1f29] hover:bg-[#262a34] border border-white/10 hover:border-[#ff5708]/50 text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm"
+              title="Notification Center & Reminders"
+              aria-label="Open notifications"
+            >
+              <Bell className="w-4 h-4 text-slate-300 group-hover:text-white" />
+              {unreadNotificationCount > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-[#ff5708] text-white text-[10px] font-bold font-mono rounded-full flex items-center justify-center shadow-[0_0_8px_rgba(255,87,8,0.7)] animate-pulse">
+                  {unreadNotificationCount > 9 ? '9+' : unreadNotificationCount}
+                </span>
+              )}
             </button>
 
             {/* PWA / APK Phone Download Button */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import { AiPhotoScanner } from './components/AiPhotoScanner';
@@ -11,6 +11,8 @@ import { ProfileModal } from './components/ProfileModal';
 import { ManualFoodModal } from './components/ManualFoodModal';
 import { InstallAppModal } from './components/InstallAppModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
+import { NotificationModal } from './components/NotificationModal';
+import { NotificationToast } from './components/NotificationToast';
 
 import { 
   UserProfile, 
@@ -21,7 +23,10 @@ import {
   WeeklyWorkoutPlan, 
   StreakState, 
   Milestone,
-  WeightLogEntry
+  WeightLogEntry,
+  AppNotification,
+  NotificationSettings,
+  NotificationCategory
 } from './types';
 
 import { 
@@ -37,6 +42,14 @@ import { calculateBMI } from './utils/calculator';
 import { sounds } from './utils/sound';
 import { User } from 'firebase/auth';
 import { initAuth } from './utils/auth';
+import { 
+  getStoredNotificationSettings, 
+  saveStoredNotificationSettings, 
+  getStoredNotificationHistory, 
+  saveStoredNotificationHistory,
+  dispatchNotification 
+} from './utils/notifications';
+import { useNotificationScheduler } from './hooks/useNotificationScheduler';
 
 export default function App() {
   // 1. User Profile State (persisted in LocalStorage)
@@ -137,7 +150,89 @@ export default function App() {
     return saved ? JSON.parse(saved) : initialWeightLogs;
   });
 
+  // 12. Notification Center & Scheduler State
+  const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>(() => {
+    return getStoredNotificationSettings();
+  });
+
+  const [notifications, setNotifications] = useState<AppNotification[]>(() => {
+    return getStoredNotificationHistory();
+  });
+
+  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+  const [activeToast, setActiveToast] = useState<AppNotification | null>(null);
+
   // LocalStorage synchronizations
+  useEffect(() => {
+    saveStoredNotificationSettings(notificationSettings);
+  }, [notificationSettings]);
+
+  useEffect(() => {
+    saveStoredNotificationHistory(notifications);
+  }, [notifications]);
+
+  const handleNotificationReceived = useCallback((notification: AppNotification) => {
+    setNotifications((prev) => [notification, ...prev.slice(0, 49)]);
+    setActiveToast(notification);
+  }, []);
+
+  useNotificationScheduler({
+    settings: notificationSettings,
+    waterLog,
+    foodLogs,
+    profile,
+    streaks,
+    onNotificationReceived: handleNotificationReceived,
+  });
+
+  const handleTriggerTestNotification = async (category: NotificationCategory = 'system') => {
+    let title = '🔔 NutriPulse Notification Test';
+    let message = 'Your device notifications, sound chime, and haptics are running smoothly!';
+    let actionTab: string | undefined = 'dashboard';
+    let actionLabel: string | undefined = 'View Dashboard';
+
+    if (category === 'hydration') {
+      title = '💧 Hydration Fuel Alert';
+      message = 'Drink a crisp glass of water (+250ml) to optimize energy and recovery.';
+      actionTab = 'water';
+      actionLabel = 'Log Water';
+    } else if (category === 'meal') {
+      title = '🥗 Meal Tracker Reminder';
+      message = 'Time to log your meal! Snap a photo or log macros to stay on track.';
+      actionTab = 'scanner';
+      actionLabel = 'Scan Food';
+    } else if (category === 'workout') {
+      title = '🏋️ Workout Call: Push Day';
+      message = 'Ready to train? Warm up and start your daily lifting session.';
+      actionTab = 'workout';
+      actionLabel = 'View Plan';
+    } else if (category === 'streak') {
+      title = `🔥 ${streaks.foodStreak}-Day Streak Active!`;
+      message = 'Your daily consistency is unmatched. Keep logging to earn bonus XP.';
+      actionTab = 'streaks';
+      actionLabel = 'View Badges';
+    }
+
+    const notif = await dispatchNotification({
+      title,
+      message,
+      category,
+      actionTab,
+      actionLabel,
+      settings: notificationSettings,
+    });
+
+    handleNotificationReceived(notif);
+  };
+
+  const handleMarkAllNotificationsRead = () => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+  };
+
+  const handleClearNotificationHistory = () => {
+    setNotifications([]);
+  };
+
   useEffect(() => {
     localStorage.setItem('nutripulse_profile', JSON.stringify(profile));
   }, [profile]);
@@ -310,6 +405,8 @@ export default function App() {
           }
         }}
         onOpenProfile={() => setIsProfileModalOpen(true)}
+        onOpenNotifications={() => setIsNotificationModalOpen(true)}
+        unreadNotificationCount={notifications.filter((n) => !n.read).length}
       />
 
       {/* Main App Content View Switcher */}
@@ -373,6 +470,7 @@ export default function App() {
             onResetWater={handleResetWater}
             onToggleReminder={handleToggleReminder}
             onUpdateReminderTime={handleUpdateReminderTime}
+            onOpenNotificationCenter={() => setIsNotificationModalOpen(true)}
           />
         )}
 
@@ -426,6 +524,30 @@ export default function App() {
       <InstallAppModal
         isOpen={isInstallModalOpen}
         onClose={() => setIsInstallModalOpen(false)}
+      />
+
+      <NotificationModal
+        isOpen={isNotificationModalOpen}
+        onClose={() => setIsNotificationModalOpen(false)}
+        settings={notificationSettings}
+        onUpdateSettings={setNotificationSettings}
+        notifications={notifications}
+        onMarkAllAsRead={handleMarkAllNotificationsRead}
+        onClearHistory={handleClearNotificationHistory}
+        onSelectActionTab={(tab) => {
+          sounds.tap();
+          setActiveTab(tab);
+        }}
+        onTriggerTestNotification={handleTriggerTestNotification}
+      />
+
+      <NotificationToast
+        notification={activeToast}
+        onClose={() => setActiveToast(null)}
+        onAction={(tab) => {
+          sounds.tap();
+          setActiveTab(tab);
+        }}
       />
 
       <OfflineIndicator />

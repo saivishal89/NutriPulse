@@ -193,3 +193,33 @@ export interface DayReport {
   workoutCompleted: boolean;
   weightKg?: number;
 }
+
+export type NotificationCategory = 'hydration' | 'meal' | 'workout' | 'streak' | 'system';
+
+export interface AppNotification {
+  id: string;
+  title: string;
+  message: string;
+  category: NotificationCategory;
+  timestamp: string; // ISO string
+  read: boolean;
+  actionTab?: string;
+  actionLabel?: string;
+}
+
+export interface NotificationSettings {
+  enabled: boolean;
+  soundEnabled: boolean;
+  vibrationEnabled: boolean;
+  hydrationReminders: boolean;
+  hydrationIntervalMinutes: number; // e.g., 60, 90, 120
+  breakfastReminder: boolean;
+  breakfastTime: string; // "08:30"
+  lunchReminder: boolean;
+  lunchTime: string; // "13:00"
+  dinnerReminder: boolean;
+  dinnerTime: string; // "19:30"
+  workoutReminder: boolean;
+  workoutTime: string; // "17:30"
+  streakAlerts: boolean;
+}
