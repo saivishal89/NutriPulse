@@ -9,6 +9,8 @@ import { StreaksAndMilestones } from './components/StreaksAndMilestones';
 import { WeeklyReports } from './components/WeeklyReports';
 import { ProfileModal } from './components/ProfileModal';
 import { ManualFoodModal } from './components/ManualFoodModal';
+import { InstallAppModal } from './components/InstallAppModal';
+import { OfflineIndicator } from './components/OfflineIndicator';
 
 import { 
   UserProfile, 
@@ -72,6 +74,7 @@ export default function App() {
   // 3. Modals State
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isManualModalOpen, setIsManualModalOpen] = useState(false);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
   const [manualMealType, setManualMealType] = useState<'breakfast' | 'lunch' | 'dinner' | 'snack'>('lunch');
 
   // 4. Food Journal Logs (Today's entries)
@@ -420,13 +423,29 @@ export default function App() {
         defaultMealType={manualMealType}
       />
 
+      <InstallAppModal
+        isOpen={isInstallModalOpen}
+        onClose={() => setIsInstallModalOpen(false)}
+      />
+
+      <OfflineIndicator />
+
       {/* Footer */}
       <footer className="border-t border-white/5 py-8 pb-28 md:pb-8 bg-[#0a0e17] text-center text-xs text-[#e5beb2]/50">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-headline font-bold text-[#dfe2ef]">NutriPulse Pro</span>
             <span className="text-[#ff5708] font-mono">• AI Diet & Workout Engine</span>
           </div>
+
+          <button
+            onClick={() => setIsInstallModalOpen(true)}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#1a1f2b] hover:bg-[#252c3d] text-[#ffdbcf] border border-[#ff5708]/30 transition text-xs font-semibold cursor-pointer shadow-sm"
+          >
+            <span>📱</span>
+            <span>Install on Phone / Download APK</span>
+          </button>
+
           <div className="font-mono text-[11px] text-[#e5beb2]/40">
             Multimodal Food Recognition • Automated Meal Prep • Biometric Trajectory
           </div>

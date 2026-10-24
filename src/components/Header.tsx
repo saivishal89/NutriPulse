@@ -15,6 +15,7 @@ import { User } from 'firebase/auth';
 import { UserProfile, StreakState, WaterLog } from '../types';
 import { formatMl } from '../utils/calculator';
 import { GoogleAuthButton } from './GoogleAuthButton';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface HeaderProps {
   profile: UserProfile;
@@ -120,6 +121,9 @@ export const Header: React.FC<HeaderProps> = ({
                 </div>
               </div>
             </button>
+
+            {/* PWA / APK Phone Download Button */}
+            <PWAInstallButton />
 
             {/* Google OAuth Login Button */}
             <GoogleAuthButton 
