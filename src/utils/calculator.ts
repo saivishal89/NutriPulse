@@ -1,12 +1,19 @@
-import { FitnessGoal, DietaryPreference, ActivityLevel, UserProfile } from '../types';
+import { FitnessGoal, DietaryPreference, ActivityLevel, FoodLogEntry } from '../types';
 
-export function calculateBMI(weightKg: number, heightCm: number): {
+export interface BmiResult {
   bmi: number;
   category: 'Underweight' | 'Normal' | 'Overweight' | 'Obese';
-} {
-  const heightM = heightCm / 100;
-  const rawBmi = weightKg / (heightM * heightM);
-  const bmi = Math.round(rawBmi * 100) / 100;
+  idealWeightMinKg: number;
+  idealWeightMaxKg: number;
+}
+
+export function calculateBMI(weightKg: number, heightCm: number): BmiResult {
+  const safeWeight = Math.max(30, Math.min(350, Number(weightKg) || 70));
+  const safeHeight = Math.max(90, Math.min(250, Number(heightCm) || 170));
+
+  const heightM = safeHeight / 100;
+  const rawBmi = safeWeight / (heightM * heightM);
+  const bmi = Math.round(rawBmi * 10) / 10;
 
   let category: 'Underweight' | 'Normal' | 'Overweight' | 'Obese' = 'Normal';
   if (bmi < 18.5) category = 'Underweight';
@@ -14,7 +21,30 @@ export function calculateBMI(weightKg: number, heightCm: number): {
   else if (bmi < 30) category = 'Overweight';
   else category = 'Obese';
 
-  return { bmi, category };
+  // Healthy BMI range 18.5 - 24.9
+  const idealWeightMinKg = Math.round(18.5 * heightM * heightM * 10) / 10;
+  const idealWeightMaxKg = Math.round(24.9 * heightM * heightM * 10) / 10;
+
+  return { bmi, category, idealWeightMinKg, idealWeightMaxKg };
+}
+
+export interface NutritionTargetsResult {
+  bmr: number;
+  tdee: number;
+  targetCalories: number;
+  proteinGrams: number;
+  carbsGrams: number;
+  fatGrams: number;
+  fiberGrams: number;
+  waterTargetMl: number;
+  bmi: number;
+  bmiCategory: 'Underweight' | 'Normal' | 'Overweight' | 'Obese';
+  nowBodyFat: string;
+  goalBodyFat: string;
+  nowMuscleBars: number;
+  goalMuscleBars: number;
+  calorieDelta: number; // Positive = surplus, negative = deficit
+  formulaUsed: string;
 }
 
 export function calculateNutritionTargets(params: {
@@ -25,42 +55,58 @@ export function calculateNutritionTargets(params: {
   activityLevel: ActivityLevel;
   goal: FitnessGoal;
   dietaryPreference: DietaryPreference;
-}) {
-  const { age, gender, heightCm, weightKg, activityLevel, goal, dietaryPreference } = params;
+}): NutritionTargetsResult {
+  const safeAge = Math.max(14, Math.min(100, Number(params.age) || 28));
+  const safeHeight = Math.max(90, Math.min(250, Number(params.heightCm) || 175));
+  const safeWeight = Math.max(35, Math.min(300, Number(params.weightKg) || 75));
+  const gender = params.gender || 'male';
+  const activityLevel = params.activityLevel || 'moderate';
+  const goal = params.goal || 'shred';
+  const dietaryPreference = params.dietaryPreference || 'high_protein';
 
-  // Mifflin-St Jeor Equation for BMR
-  let bmr = 10 * weightKg + 6.25 * heightCm - 5 * age;
+  // Mifflin-St Jeor Equation for Basal Metabolic Rate (BMR) - Validated Standard (1990)
+  // BMR = 10 * weight(kg) + 6.25 * height(cm) - 5 * age(y) + s (s=+5 for males, -161 for females)
+  let bmr = 10 * safeWeight + 6.25 * safeHeight - 5 * safeAge;
   if (gender === 'male') {
     bmr += 5;
   } else if (gender === 'female') {
     bmr -= 161;
   } else {
-    bmr -= 78;
+    bmr -= 78; // Gender-neutral average
   }
+  bmr = Math.round(bmr);
 
-  // TDEE Multipliers
+  // Total Daily Energy Expenditure (TDEE) Physical Activity Multipliers
   const activityFactors: Record<ActivityLevel, number> = {
-    sedentary: 1.2,
-    light: 1.375,
-    moderate: 1.55,
-    active: 1.725,
-    very_active: 1.9,
+    sedentary: 1.2,       // Little to no exercise, desk job
+    light: 1.375,         // Light exercise 1-3 days/week
+    moderate: 1.55,       // Moderate exercise 3-5 days/week
+    active: 1.725,        // Hard exercise 6-7 days/week
+    very_active: 1.9,     // Physical labor or heavy training 2x/day
   };
-  const tdee = Math.round(bmr * activityFactors[activityLevel]);
+  const tdee = Math.round(bmr * (activityFactors[activityLevel] || 1.55));
 
-  // Goal adjustment
+  // Goal Caloric Adjustments
   let targetCalories = tdee;
   if (goal === 'shred') {
-    targetCalories = Math.max(1200, Math.round(tdee * 0.78)); // ~22% deficit for effective fat loss
+    // 20-22% progressive deficit, with a safe physiological floor (1200 kcal women, 1500 kcal men)
+    const floor = gender === 'female' ? 1200 : 1450;
+    targetCalories = Math.max(floor, Math.round(tdee * 0.78));
   } else if (goal === 'build_muscle') {
-    targetCalories = Math.round(tdee * 1.12); // ~12% clean surplus
+    // 10-12% clean surplus to fuel hypertrophy with minimal adipose gain
+    targetCalories = Math.round(tdee * 1.12);
   } else if (goal === 'recomp') {
-    targetCalories = Math.round(tdee * 0.95); // High protein slight deficit
-  } else {
+    // High protein slight deficit (-5%)
+    targetCalories = Math.round(tdee * 0.95);
+  } else if (goal === 'maintenance' || goal === 'general_wellness') {
     targetCalories = tdee;
+  } else if (goal === 'endurance') {
+    targetCalories = Math.round(tdee * 1.05);
   }
 
-  // Macronutrient breakdown (grams)
+  const calorieDelta = targetCalories - tdee;
+
+  // Evidence-based Macronutrient Distribution
   let proteinRatio = 0.30;
   let carbRatio = 0.45;
   let fatRatio = 0.25;
@@ -77,51 +123,57 @@ export function calculateNutritionTargets(params: {
     proteinRatio = 0.35;
     carbRatio = 0.25;
     fatRatio = 0.40;
-  } else if (dietaryPreference === 'vegan' || dietaryPreference === 'vegetarian') {
+  } else if (dietaryPreference === 'vegan' || dietaryPreference === 'vegetarian' || dietaryPreference === 'eggetarian') {
     proteinRatio = 0.28;
-    carbRatio = 0.50;
-    fatRatio = 0.22;
+    carbRatio = 0.48;
+    fatRatio = 0.24;
+  } else if (dietaryPreference === 'mediterranean') {
+    proteinRatio = 0.28;
+    carbRatio = 0.44;
+    fatRatio = 0.28;
   }
 
   const proteinGrams = Math.round((targetCalories * proteinRatio) / 4);
   const carbsGrams = Math.round((targetCalories * carbRatio) / 4);
   const fatGrams = Math.round((targetCalories * fatRatio) / 9);
-  const fiberGrams = Math.round((targetCalories / 1000) * 14); // 14g per 1000 kcal
+  // Dietary fiber: 14g per 1000 kcal (Academy of Nutrition and Dietetics standard)
+  const fiberGrams = Math.max(25, Math.round((targetCalories / 1000) * 14));
 
-  // Water intake calculation (standard 35ml per kg, plus 500ml for active workouts)
-  let baseWater = (weightKg * 35) / 1000;
+  // Water intake calculation (standard 35ml/kg + workout replacement)
+  let baseWater = (safeWeight * 35) / 1000;
   if (activityLevel === 'moderate' || activityLevel === 'active' || activityLevel === 'very_active') {
     baseWater += 0.5;
   }
-  // Round to nearest 0.25L
   const waterTargetL = Math.max(2.0, Math.round(baseWater * 4) / 4);
   const waterTargetMl = Math.round(waterTargetL * 1000);
 
-  // Body fat & muscle estimates
-  const { bmi, category } = calculateBMI(weightKg, heightCm);
+  const { bmi, category } = calculateBMI(safeWeight, safeHeight);
+
   let nowBodyFat = '20-24%';
-  let goalBodyFat = '8-10%';
+  let goalBodyFat = '10-12%';
   let nowMuscleBars = 2;
   let goalMuscleBars = 4;
 
   if (bmi >= 30) {
     nowBodyFat = '28-34%';
-    goalBodyFat = '12-15%';
+    goalBodyFat = '14-16%';
     nowMuscleBars = 1;
     goalMuscleBars = 4;
   } else if (bmi >= 25) {
-    nowBodyFat = '20-25%';
-    goalBodyFat = '8-11%';
+    nowBodyFat = '22-26%';
+    goalBodyFat = '10-12%';
     nowMuscleBars = 2;
     goalMuscleBars = 5;
   } else if (bmi < 20) {
     nowBodyFat = '12-15%';
-    goalBodyFat = '10-12%';
+    goalBodyFat = '11-13%';
     nowMuscleBars = 1;
     goalMuscleBars = 4;
   }
 
   return {
+    bmr,
+    tdee,
     targetCalories,
     proteinGrams,
     carbsGrams,
@@ -134,7 +186,31 @@ export function calculateNutritionTargets(params: {
     goalBodyFat,
     nowMuscleBars,
     goalMuscleBars,
+    calorieDelta,
+    formulaUsed: 'Mifflin-St Jeor Equation (1990) & ACSM Guidelines',
   };
+}
+
+export function calculateDailyNutritionTotals(foodLogs: FoodLogEntry[]): {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fiber: number;
+  count: number;
+} {
+  return foodLogs.reduce(
+    (acc, item) => {
+      acc.calories += Math.round(Number(item.calories) || 0);
+      acc.protein += Math.round((Number(item.protein) || 0) * 10) / 10;
+      acc.carbs += Math.round((Number(item.carbs) || 0) * 10) / 10;
+      acc.fat += Math.round((Number(item.fat) || 0) * 10) / 10;
+      acc.fiber += Math.round((Number(item.fiber) || 0) * 10) / 10;
+      acc.count += 1;
+      return acc;
+    },
+    { calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0, count: 0 }
+  );
 }
 
 export function formatMl(ml: number): string {

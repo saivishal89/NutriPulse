@@ -45,12 +45,13 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const tabs = [
     { id: 'dashboard', label: 'Today', icon: BarChart3, symbol: 'vital_signs' },
-    { id: 'scanner', label: 'Scan AI', icon: Camera, symbol: 'photo_camera', highlight: true },
+    { id: 'coach', label: 'AI Coach', icon: Sparkles, symbol: 'smart_toy', highlight: true },
+    { id: 'scanner', label: 'Scan AI', icon: Camera, symbol: 'photo_camera' },
     { id: 'mealprep', label: 'Meals & Prep', icon: Calendar, symbol: 'restaurant_menu' },
     { id: 'workout', label: 'Workouts', icon: Dumbbell, symbol: 'fitness_center' },
     { id: 'water', label: 'Hydration', icon: Droplet, symbol: 'water_drop' },
     { id: 'streaks', label: 'Milestones', icon: Award, symbol: 'military_tech' },
-    { id: 'reports', label: 'Insights', icon: Sparkles, symbol: 'insights' },
+    { id: 'reports', label: 'Insights', icon: BarChart3, symbol: 'insights' },
   ];
 
   return (

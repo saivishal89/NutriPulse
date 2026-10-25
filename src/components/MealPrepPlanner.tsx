@@ -27,6 +27,7 @@ export const MealPrepPlanner: React.FC<MealPrepPlannerProps> = ({
 }) => {
   const [selectedDayIndex, setSelectedDayIndex] = useState(2); // Default Wednesday
   const [isRegenerating, setIsRegenerating] = useState(false);
+  const [generationError, setGenerationError] = useState<string | null>(null);
   const [justLoggedMealId, setJustLoggedMealId] = useState<string | null>(null);
 
   // Batch Prep Timer state (45 minutes = 2700 seconds)
@@ -134,6 +135,7 @@ export const MealPrepPlanner: React.FC<MealPrepPlannerProps> = ({
   // Full 7-Day Plan AI Regeneration
   const handleRegenerateFullPlan = async () => {
     setIsRegenerating(true);
+    setGenerationError(null);
     sounds.camera();
 
     try {
@@ -141,24 +143,39 @@ export const MealPrepPlanner: React.FC<MealPrepPlannerProps> = ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          calorieTarget: profile.targetCalories,
-          dietaryPreference: profile.dietaryPreference,
-          goal: profile.goal,
-          targetProtein: profile.proteinGrams,
-          targetCarbs: profile.carbsGrams,
-          targetFat: profile.fatGrams,
+          profile: {
+            goal: profile.goal,
+            targetCalories: profile.targetCalories,
+            proteinGrams: profile.proteinGrams,
+            carbsGrams: profile.carbsGrams,
+            fatGrams: profile.fatGrams,
+            dietaryPreference: profile.dietaryPreference,
+            allergies: profile.allergies,
+            allergiesList: profile.allergiesList,
+            foodDislikes: profile.foodDislikes,
+            cuisinePreference: profile.cuisinePreference,
+            dailyBudget: profile.dailyBudget,
+            cookingTimeMinutes: profile.cookingTimeMinutes,
+            mealsPerDay: profile.mealsPerDay,
+          },
         }),
       });
 
-      if (response.ok) {
-        const newPlan = await response.json();
-        if (newPlan?.days?.length > 0) {
-          onUpdateMealPlan(newPlan);
-          sounds.success();
-        }
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `Server returned error (${response.status})`);
       }
-    } catch (err) {
+
+      const newPlan = await response.json();
+      if (newPlan?.days?.length > 0) {
+        onUpdateMealPlan(newPlan);
+        sounds.success();
+      } else {
+        throw new Error('Meal plan response was empty or improperly structured.');
+      }
+    } catch (err: any) {
       console.error('Failed to regenerate meal plan:', err);
+      setGenerationError(err?.message || 'Could not regenerate AI meal plan. Please check your connection and retry.');
     } finally {
       setIsRegenerating(false);
     }
@@ -210,6 +227,22 @@ export const MealPrepPlanner: React.FC<MealPrepPlannerProps> = ({
           </button>
         </div>
       </div>
+
+      {generationError && (
+        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-rose-400 text-[20px]">error</span>
+            <span>{generationError}</span>
+          </div>
+          <button
+            type="button"
+            onClick={handleRegenerateFullPlan}
+            className="px-3 py-1 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-lg text-xs whitespace-nowrap cursor-pointer transition-colors"
+          >
+            Retry Now
+          </button>
+        </div>
+      )}
 
       {/* 7-Day Interactive Schedule Carousel */}
       <section className="flex flex-col gap-2">

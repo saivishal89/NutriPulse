@@ -18,7 +18,16 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
-// Explicitly serve Web Manifest with CORS for Bubblewrap and Web-to-APK converters
+// Explicitly serve Web Manifest and static icons with CORS for Bubblewrap, PWABuilder, and Web-to-APK converters
+app.use(express.static(path.resolve(__dirname, 'public'), {
+  setHeaders: (res, filePath) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    if (filePath.endsWith('.webmanifest') || filePath.endsWith('manifest.json')) {
+      res.setHeader('Content-Type', 'application/manifest+json; charset=utf-8');
+    }
+  }
+}));
+
 app.get('/manifest.webmanifest', (_req: Request, res: Response) => {
   res.setHeader('Content-Type', 'application/manifest+json; charset=utf-8');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -42,6 +51,93 @@ const ai = new GoogleGenAI({
   },
 });
 
+// Endpoint: Multi-Turn AI Nutrition Coach Chat
+app.post('/api/chat', async (req: Request, res: Response) => {
+  try {
+    const { messages, profile, conversationId } = req.body;
+
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      return res.status(400).json({ error: 'Missing or empty messages array' });
+    }
+
+    if (!apiKey) {
+      return res.status(503).json({ 
+        error: 'Gemini API key is not configured. Please configure GEMINI_API_KEY in your server environment variables or Secrets panel to enable live AI Nutrition Coach responses.',
+        code: 'API_KEY_MISSING'
+      });
+    }
+
+    // Build rich, evidence-based personalized user context
+    const userContext = profile ? `
+Client Personalized Profile & Biometrics:
+- Name: ${profile.name || 'Client'}
+- Age: ${profile.age || 'Not specified'} years, Gender: ${profile.gender || 'Not specified'}
+- Height: ${profile.heightCm || 'Not specified'} cm, Current Weight: ${profile.weightKg || 'Not specified'} kg, Target Weight: ${profile.targetWeightKg || 'Not specified'} kg
+- Current BMI: ${profile.bmi || 'N/A'} (${profile.bmiCategory || 'N/A'})
+- Primary Goal: ${profile.goal || 'Health & Wellness'}
+- Activity Level: ${profile.activityLevel || 'Moderate'}
+- Daily Calorie Target: ${profile.targetCalories || 'Estimated'} kcal
+- Daily Macro Targets: Protein ${profile.proteinGrams || 140}g, Carbs ${profile.carbsGrams || 150}g, Fat ${profile.fatGrams || 50}g, Fiber ${profile.fiberGrams || 28}g
+- Water Target: ${(profile.waterTargetMl ? profile.waterTargetMl / 1000 : 2.5).toFixed(1)} L
+- Dietary Preference: ${profile.dietaryPreference || 'Balanced'}
+- Strict Allergies & Intolerances: ${profile.allergies || 'None declared'} ${profile.allergiesList?.length ? `(${profile.allergiesList.join(', ')})` : ''}
+- Disliked Foods: ${profile.foodDislikes || 'None'}
+- Preferred Cuisine: ${profile.cuisinePreference || 'Universal / Any'}
+- Daily Food Budget: ${profile.dailyBudget || 'Moderate'}
+- Available Cooking Time: ${profile.cookingTimeMinutes ? `${profile.cookingTimeMinutes} minutes` : 'Flexible'}
+- Meals per day: ${profile.mealsPerDay || 3}
+- Training Schedule: ${profile.trainingSchedule || 'Flexible'}
+` : 'No personalized profile configured yet. Provide evidence-based, general nutrition guidance and mention that answers can be personalized once profile stats are entered.';
+
+    const systemInstruction = `You are NutriPulse AI Coach, an expert clinical & sports nutritionist, registered dietitian consultant, and evidence-grounded wellness mentor.
+
+${userContext}
+
+STRICT PROFESSIONAL RULES:
+1. PERSONALIZATION: Always tailor your answers to the client's actual biometrics, specific goal (${profile?.goal || 'wellness'}), target calories (${profile?.targetCalories || 'N/A'} kcal), and exact protein targets (${profile?.proteinGrams || 'N/A'}g). Never return generic canned answers.
+2. ALLERGIES & PREFERENCES (CRITICAL): Strictly respect all declared allergies (${profile?.allergies || 'None'}). NEVER recommend any ingredients containing allergens. If the client is Vegetarian, Vegan, or Eggetarian, strictly ensure all meal and snack suggestions adhere to their dietary preference.
+3. MATHEMATICAL ACCURACY: Ensure portion sizes and estimated calories/macros add up consistently. Never invent impossible macronutrient numbers (remember: 1g protein = 4 kcal, 1g carb = 4 kcal, 1g fat = 9 kcal).
+4. EVIDENCE & SAFETY: Ground advice in peer-reviewed science (e.g. USDA FoodData, ACSM, WHO guidelines). Avoid miracle diets, detoxes, or unproven fat-loss supplements.
+5. MEDICAL SCOPE BOUNDARY: You provide expert nutritional coaching and education, not clinical medical diagnosis. For severe medical conditions, pregnancy, or eating disorders, provide cautious general advice and advise consulting a physician or registered dietitian. Never prescribe medications.
+6. FORMATTING: Use clean, readable formatting with clear headings, bullet points, and practical recipes/steps. Keep advice actionable and encouraging.`;
+
+    // Map conversation history into Gemini format (last 12 turns)
+    const recentMessages = messages.slice(-12);
+    const contents = recentMessages.map((m: any) => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: String(m.content || '') }],
+    }));
+
+    // Ensure first message has role 'user'
+    if (contents.length > 0 && contents[0].role !== 'user') {
+      contents.unshift({ role: 'user', parts: [{ text: 'Hello coach, let us discuss my nutrition plan.' }] });
+    }
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: contents,
+      config: {
+        systemInstruction,
+        temperature: 0.7,
+        topP: 0.95,
+      },
+    });
+
+    const reply = response.text || "I couldn't generate a complete response. Please try rephrasing your question.";
+    return res.json({
+      reply,
+      conversationId: conversationId || `conv-${Date.now()}`,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (err: any) {
+    console.error('Error in /api/chat:', err);
+    return res.status(500).json({
+      error: err?.message || 'Failed to generate response from AI Nutrition Coach',
+      code: 'GENERATION_FAILED',
+    });
+  }
+});
+
 // Endpoint: AI Food Nutrition Photo Estimation
 app.post('/api/analyze-meal', async (req: Request, res: Response) => {
   try {
@@ -52,25 +148,9 @@ app.post('/api/analyze-meal', async (req: Request, res: Response) => {
     }
 
     if (!apiKey) {
-      // Intelligent fallback when API key is not configured
-      return res.json({
-        mealName: 'Nutrient-Dense Fit Meal',
-        confidence: 0.88,
-        items: [
-          { name: 'Grilled Protein Portion', portion: '180g', calories: 290, protein: 38, carbs: 2, fat: 12 },
-          { name: 'Complex Carbohydrate / Grain', portion: '150g', calories: 210, protein: 5, carbs: 42, fat: 3 },
-          { name: 'Steamed Vegetables & Greens', portion: '120g', calories: 55, protein: 3, carbs: 10, fat: 1 },
-          { name: 'Healthy Dressing / Olive Oil', portion: '10g', calories: 88, protein: 0, carbs: 0, fat: 10 }
-        ],
-        totalCalories: 643,
-        totalProtein: 46,
-        totalCarbs: 54,
-        totalFat: 26,
-        fiber: 7,
-        healthScore: 9.1,
-        dietaryTags: ['High Protein', 'Clean Fuel', 'Muscle Building'],
-        nutritionInsights: 'Well-balanced macronutrient ratio with lean protein and high dietary fiber. Ideal for post-workout recovery.',
-        isFallback: true
+      return res.status(503).json({
+        error: 'GEMINI_API_KEY is not configured. Please configure your key in AI Studio Secrets or log meals using the verified nutrition database.',
+        code: 'MISSING_API_KEY'
       });
     }
 
@@ -135,24 +215,9 @@ Respond ONLY with valid JSON with this exact structure:
     return res.json(parsedData);
   } catch (err: any) {
     console.error('Error analyzing meal photo with Gemini:', err);
-    // Return a structured graceful fallback so user can still log their meal seamlessly
-    return res.json({
-      mealName: 'Nutritional Meal',
-      confidence: 0.85,
-      items: [
-        { name: 'Estimated Protein Serving', portion: '160g', calories: 260, protein: 35, carbs: 1, fat: 12 },
-        { name: 'Complex Grains / Base', portion: '140g', calories: 190, protein: 4, carbs: 38, fat: 2 },
-        { name: 'Fresh Veggies & Sides', portion: '100g', calories: 50, protein: 2, carbs: 9, fat: 1 }
-      ],
-      totalCalories: 500,
-      totalProtein: 41,
-      totalCarbs: 48,
-      totalFat: 15,
-      fiber: 6,
-      healthScore: 8.8,
-      dietaryTags: ['Healthy Choice', 'Balanced Fuel'],
-      nutritionInsights: 'Estimated nutritional profile based on visual recognition. You can adjust the portions or calories if needed.',
-      warning: err?.message || 'Generated via fallback estimator'
+    return res.status(500).json({
+      error: err?.message || 'Failed to analyze food photo with AI vision. Please ensure the food is clearly visible and retry.',
+      code: 'VISION_ANALYSIS_FAILED'
     });
   }
 });
@@ -160,13 +225,16 @@ Respond ONLY with valid JSON with this exact structure:
 // Endpoint: AI Meal Plan & Weekly Prep Generator
 app.post('/api/generate-meal-plan', async (req: Request, res: Response) => {
   try {
-    const { profile } = req.body;
-    if (!profile) {
-      return res.status(400).json({ error: 'Missing user profile' });
+    const profile = req.body.profile || req.body;
+    if (!profile || (!profile.targetCalories && !profile.calorieTarget)) {
+      return res.status(400).json({ error: 'Missing user profile or target calorie requirements' });
     }
 
     if (!apiKey) {
-      return res.status(503).json({ error: 'API key not configured' });
+      return res.status(503).json({ 
+        error: 'GEMINI_API_KEY is not configured. Please configure it in AI Studio Secrets to generate personalized AI meal plans.',
+        code: 'MISSING_API_KEY'
+      });
     }
 
     const prompt = `You are a world-class dietitian and meal prep coach designing a complete 7-day personalized meal prep plan for a client with this profile:
@@ -174,13 +242,24 @@ app.post('/api/generate-meal-plan', async (req: Request, res: Response) => {
 - Daily Calorie Target: ${profile.targetCalories} kcal
 - Daily Macros: Protein ${profile.proteinGrams}g, Carbs ${profile.carbsGrams}g, Fat ${profile.fatGrams}g
 - Dietary Preference: ${profile.dietaryPreference || 'Balanced / High Protein'}
-- Allergies / Dislikes: ${profile.allergies || 'None'}
-- Meals per day: 3 main meals + 1 snack
+- Strict Allergies (NEVER INCLUDE): ${profile.allergies || 'None'} ${profile.allergiesList?.length ? `(${profile.allergiesList.join(', ')})` : ''}
+- Disliked Foods (AVOID): ${profile.foodDislikes || 'None'}
+- Preferred Cuisine / Regional Style: ${profile.cuisinePreference || 'Any / Universal'}
+- Daily Food Budget: ${profile.dailyBudget || 'Moderate'}
+- Available Cooking Time: ${profile.cookingTimeMinutes || 30} minutes
+- Meals per day: ${profile.mealsPerDay || 4}
+
+CRITICAL RULES:
+1. If Vegetarian, Vegan, or Eggetarian, NEVER include chicken, beef, pork, fish, or seafood.
+2. If Vegan, strictly omit all dairy, eggs, meat, and honey.
+3. If allergies are declared, strictly exclude all matching allergens.
+4. If cuisine is Indian, incorporate healthy regional staples (e.g. paneer/tofu, moong dal, roti, brown rice, chana, sabzi) while hitting the exact macros.
+5. Calorie total of the meals each day must equal approximately ${profile.targetCalories} kcal.
 
 Create a comprehensive 7-day meal plan (Monday to Sunday).
 Each day must have 4 meals: Breakfast, Lunch, Dinner, Snack.
 For each meal provide: title, calories, protein (g), carbs (g), fat (g), prepTime, cookTime, ingredients list, and simple quick prep instructions.
-Also provide a "mealPrepGuide" with batch cooking tips (e.g. how to cook Sunday night for Mon-Wed, and Wed night for Thu-Sun), and a categorized "groceryList" with produce, protein, dairy, pantry items.
+Also provide a "mealPrepGuide" with batch cooking tips, and a categorized "groceryList" with produce, protein, dairy, pantry items.
 
 Respond ONLY with valid JSON formatted as:
 {

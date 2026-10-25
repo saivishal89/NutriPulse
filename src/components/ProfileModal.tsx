@@ -46,6 +46,30 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
   const [customCalories, setCustomCalories] = useState(profile.targetCalories);
   const [isCalorieCustom, setIsCalorieCustom] = useState(false);
   const [allergies, setAllergies] = useState(profile.allergies || '');
+  const [allergiesList, setAllergiesList] = useState<string[]>(profile.allergiesList || []);
+  const [foodDislikes, setFoodDislikes] = useState(profile.foodDislikes || '');
+  const [cuisinePreference, setCuisinePreference] = useState(profile.cuisinePreference || 'Indian');
+  const [dailyBudget, setDailyBudget] = useState<'budget' | 'moderate' | 'premium'>(profile.dailyBudget || 'moderate');
+  const [cookingTimeMinutes, setCookingTimeMinutes] = useState(profile.cookingTimeMinutes || 30);
+  const [mealsPerDay, setMealsPerDay] = useState(profile.mealsPerDay || 4);
+
+  const commonAllergens = [
+    'Peanuts',
+    'Tree Nuts',
+    'Dairy / Lactose',
+    'Gluten / Wheat',
+    'Shellfish',
+    'Eggs',
+    'Soy',
+    'Fish',
+    'Sesame'
+  ];
+
+  const toggleAllergen = (item: string) => {
+    setAllergiesList(prev => 
+      prev.includes(item) ? prev.filter(x => x !== item) : [...prev, item]
+    );
+  };
 
   // Calculate live dynamic metrics
   const calculated = calculateNutritionTargets({
@@ -78,6 +102,12 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
       dietaryPreference,
       equipment,
       allergies,
+      allergiesList,
+      foodDislikes,
+      cuisinePreference,
+      dailyBudget,
+      cookingTimeMinutes,
+      mealsPerDay,
       targetCalories: displayCalories,
       proteinGrams: calculated.proteinGrams,
       carbsGrams: calculated.carbsGrams,
@@ -409,13 +439,17 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
                   onChange={(e) => setDietaryPreference(e.target.value as DietaryPreference)}
                   className="w-full bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white text-xs sm:text-sm focus:border-orange-500 focus:outline-none"
                 >
-                  <option value="high_protein">High Protein (Athletic)</option>
+                  <option value="vegetarian">Vegetarian (Lacto-Vegetarian)</option>
+                  <option value="vegan">Pure Vegan (100% Plant-Based)</option>
+                  <option value="eggetarian">Eggetarian (Vegetarian + Eggs)</option>
+                  <option value="non-vegetarian">Non-Vegetarian (Omnivore)</option>
+                  <option value="high_protein">High Protein Athletic</option>
                   <option value="balanced">Balanced Whole Foods</option>
                   <option value="keto">Ketogenic (Ultra Low Carb)</option>
                   <option value="low_carb">Low Carb High Fat</option>
-                  <option value="mediterranean">Mediterranean Diet</option>
-                  <option value="vegetarian">Vegetarian High Protein</option>
-                  <option value="vegan">Plant-Based / Vegan</option>
+                  <option value="mediterranean">Mediterranean Heart-Healthy</option>
+                  <option value="pescatarian">Pescatarian (Fish & Seafood)</option>
+                  <option value="paleo">Paleo Clean Eating</option>
                 </select>
               </div>
 
@@ -433,15 +467,118 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               </div>
             </div>
 
-            <div>
-              <label className="text-[11px] text-slate-400 font-semibold block mb-1">Allergies / Disliked Foods</label>
-              <input 
-                type="text"
-                value={allergies}
-                onChange={(e) => setAllergies(e.target.value)}
-                placeholder="e.g. Shellfish, peanuts, lactose, pork..."
-                className="w-full bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white text-xs sm:text-sm focus:border-orange-500 focus:outline-none"
-              />
+            {/* Lifestyle, Cuisine & Prep Preferences */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-white/5">
+              <div>
+                <label className="text-[11px] text-slate-400 font-semibold block mb-1">Cuisine Style</label>
+                <select 
+                  value={cuisinePreference}
+                  onChange={(e) => setCuisinePreference(e.target.value)}
+                  className="w-full bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white text-xs sm:text-sm focus:border-orange-500 focus:outline-none"
+                >
+                  <option value="Indian">Indian (Dal, Roti, Paneer, Sabzi)</option>
+                  <option value="South Indian">South Indian (Idli, Dosa, Sambar, Fish)</option>
+                  <option value="North Indian">North Indian (Tandoori, Rajma, Curries)</option>
+                  <option value="Mediterranean">Mediterranean (Olive oil, Feta, Greens)</option>
+                  <option value="Western">Western / Continental (Oats, Grills, Bowls)</option>
+                  <option value="East Asian">East Asian (Tofu, Stir-fry, Edamame)</option>
+                  <option value="Universal">Universal / Diverse</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-[11px] text-slate-400 font-semibold block mb-1">Meals Per Day</label>
+                <select 
+                  value={mealsPerDay}
+                  onChange={(e) => setMealsPerDay(parseInt(e.target.value, 10))}
+                  className="w-full bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white text-xs sm:text-sm focus:border-orange-500 focus:outline-none"
+                >
+                  <option value={2}>2 Meals (Intermittent Fasting)</option>
+                  <option value={3}>3 Main Meals</option>
+                  <option value={4}>4 Meals (3 Meals + 1 Snack)</option>
+                  <option value={5}>5 Small Frequent Meals</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-[11px] text-slate-400 font-semibold block mb-1">Available Cooking Time</label>
+                <select 
+                  value={cookingTimeMinutes}
+                  onChange={(e) => setCookingTimeMinutes(parseInt(e.target.value, 10))}
+                  className="w-full bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white text-xs sm:text-sm focus:border-orange-500 focus:outline-none"
+                >
+                  <option value={15}>15 mins (Quick / Minimal Prep)</option>
+                  <option value={30}>30 mins (Moderate Home Cooking)</option>
+                  <option value={45}>45 mins (Batch Cooking Enthusiast)</option>
+                  <option value={60}>60+ mins (Gourmet / Deep Prep)</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Strict Food Allergies Checklist */}
+            <div className="pt-2 border-t border-white/5 space-y-2">
+              <label className="text-[11px] text-slate-400 font-semibold block">
+                Strict Food Allergies (Excluded completely from all AI recipes)
+              </label>
+              <div className="flex flex-wrap gap-1.5">
+                {commonAllergens.map((allergen) => {
+                  const isChecked = allergiesList.includes(allergen);
+                  return (
+                    <button
+                      key={allergen}
+                      type="button"
+                      onClick={() => toggleAllergen(allergen)}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                        isChecked
+                          ? 'bg-rose-500/20 text-rose-300 border border-rose-500/50'
+                          : 'bg-slate-800/80 text-slate-400 border border-white/5 hover:text-white hover:bg-slate-800'
+                      }`}
+                    >
+                      <span>{isChecked ? '✕' : '+'}</span>
+                      <span>{allergen}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                <div>
+                  <label className="text-[10px] text-slate-400 block mb-0.5">Other specific allergies</label>
+                  <input 
+                    type="text"
+                    value={allergies}
+                    onChange={(e) => setAllergies(e.target.value)}
+                    placeholder="e.g. Mustard, Kiwi, MSG..."
+                    className="w-full bg-slate-800 border border-white/10 rounded-lg px-3 py-1.5 text-white text-xs focus:border-orange-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] text-slate-400 block mb-0.5">Disliked ingredients to avoid</label>
+                  <input 
+                    type="text"
+                    value={foodDislikes}
+                    onChange={(e) => setFoodDislikes(e.target.value)}
+                    placeholder="e.g. Cilantro, Bitter gourd, Mushrooms..."
+                    className="w-full bg-slate-800 border border-white/10 rounded-lg px-3 py-1.5 text-white text-xs focus:border-orange-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Scientific BMR & TDEE Transparency Box */}
+            <div className="p-3 bg-slate-800/40 rounded-xl border border-white/5 text-[11px] text-slate-400 space-y-1">
+              <div className="flex justify-between font-mono text-slate-300">
+                <span>Mifflin-St Jeor Basal Metabolic Rate (BMR):</span>
+                <span className="font-bold text-white">{calculated.bmr} kcal/day</span>
+              </div>
+              <div className="flex justify-between font-mono text-slate-300">
+                <span>Total Daily Energy Expenditure (TDEE):</span>
+                <span className="font-bold text-white">{calculated.tdee} kcal/day</span>
+              </div>
+              <div className="flex justify-between font-mono text-orange-300 font-semibold pt-1 border-t border-white/5">
+                <span>Target Intake for Goal ({goal}):</span>
+                <span>{displayCalories} kcal/day</span>
+              </div>
             </div>
           </div>
 

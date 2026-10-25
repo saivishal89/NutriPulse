@@ -261,6 +261,39 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </section>
 
+      {/* AI Nutrition Coach Contextual Launcher */}
+      <section className="w-full rounded-2xl bg-gradient-to-r from-[#182622] via-[#1c1f29] to-[#1c1f29] p-4 sm:p-5 shadow-xl border border-emerald-500/20 relative overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(78,222,163,0.2)]">
+              <span className="material-symbols-outlined text-[24px]">smart_toy</span>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-headline text-base font-bold text-white tracking-tight">AI Nutrition Coach</span>
+                <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  REAL-TIME ADVICE
+                </span>
+              </div>
+              <p className="text-xs text-slate-300 mt-0.5">
+                {remainingCalories > 100 
+                  ? `You have ${remainingCalories} kcal and ${Math.max(0, targetProtein - totalProteinEaten)}g protein left today.` 
+                  : `You've met your target calories today! Let's lock in hydration & muscle recovery.`}
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => onNavigateTab('coach')}
+            className="flex items-center justify-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs rounded-xl shadow-lg shadow-emerald-500/20 transition-all active:scale-95 cursor-pointer whitespace-nowrap self-start sm:self-auto"
+          >
+            <span>Ask Nutrition Coach</span>
+            <ChevronRight className="w-4 h-4 text-black" />
+          </button>
+        </div>
+      </section>
+
       {/* 2. Interactive Hydration Water Tracker Card */}
       <section className="w-full rounded-2xl bg-[#1c1f29]/80 backdrop-blur-xl p-4 sm:p-5 shadow-xl border border-white/5 relative overflow-hidden">
         <div className="flex items-center justify-between mb-3">

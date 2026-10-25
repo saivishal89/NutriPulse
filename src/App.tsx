@@ -13,6 +13,7 @@ import { InstallAppModal } from './components/InstallAppModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { NotificationModal } from './components/NotificationModal';
 import { NotificationToast } from './components/NotificationToast';
+import { AiNutritionCoach } from './components/AiNutritionCoach';
 
 import { 
   UserProfile, 
@@ -445,6 +446,14 @@ export default function App() {
           />
         )}
 
+        {activeTab === 'coach' && (
+          <AiNutritionCoach
+            profile={profile}
+            onOpenProfile={() => setIsProfileModalOpen(true)}
+            onNavigateTab={setActiveTab}
+          />
+        )}
+
         {activeTab === 'scanner' && (
           <AiPhotoScanner
             onAddMealLog={handleAddMeal}
@@ -586,14 +595,31 @@ export default function App() {
               sounds.tap();
               setActiveTab('dashboard');
             }}
-            className={`flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] transition-all cursor-pointer ${
+            className={`flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] transition-all cursor-pointer ${
               activeTab === 'dashboard'
                 ? 'text-[#ff5708] drop-shadow-[0_0_12px_rgba(255,87,8,0.5)] font-bold'
                 : 'text-[#e5beb2]/60 hover:text-white'
             }`}
           >
-            <span className="material-symbols-outlined text-[24px]">vital_signs</span>
-            <span className="font-mono text-[10px] tracking-wide">Today</span>
+            <span className="material-symbols-outlined text-[22px]">vital_signs</span>
+            <span className="font-mono text-[9px] tracking-wide">Today</span>
+          </button>
+
+          {/* AI Coach */}
+          <button
+            type="button"
+            onClick={() => {
+              sounds.tap();
+              setActiveTab('coach');
+            }}
+            className={`flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] transition-all cursor-pointer ${
+              activeTab === 'coach'
+                ? 'text-[#4edea3] drop-shadow-[0_0_12px_rgba(78,222,163,0.5)] font-bold'
+                : 'text-[#e5beb2]/60 hover:text-white'
+            }`}
+          >
+            <span className="material-symbols-outlined text-[22px]">smart_toy</span>
+            <span className="font-mono text-[9px] tracking-wide">AI Coach</span>
           </button>
 
           {/* Elevated Floating Camera Scan AI Button */}

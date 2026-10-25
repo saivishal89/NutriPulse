@@ -1,4 +1,10 @@
-export type FitnessGoal = 'shred' | 'build_muscle' | 'recomp' | 'endurance';
+export type FitnessGoal = 
+  | 'shred' 
+  | 'build_muscle' 
+  | 'recomp' 
+  | 'maintenance' 
+  | 'endurance' 
+  | 'general_wellness';
 
 export type DietaryPreference = 
   | 'balanced' 
@@ -7,6 +13,8 @@ export type DietaryPreference =
   | 'low_carb' 
   | 'vegan' 
   | 'vegetarian' 
+  | 'eggetarian' 
+  | 'non_vegetarian' 
   | 'mediterranean';
 
 export type ActivityLevel = 
@@ -31,6 +39,13 @@ export interface UserProfile {
   equipment: EquipmentType;
   experienceLevel: 'beginner' | 'intermediate' | 'advanced';
   allergies: string;
+  allergiesList?: string[];
+  foodDislikes?: string;
+  cuisinePreference?: string;
+  dailyBudget?: 'budget' | 'moderate' | 'premium';
+  cookingTimeMinutes?: number;
+  mealsPerDay?: number;
+  trainingSchedule?: 'morning' | 'afternoon' | 'evening' | 'none';
   targetCalories: number;
   waterTargetMl: number;
   proteinGrams: number;
@@ -222,4 +237,38 @@ export interface NotificationSettings {
   workoutReminder: boolean;
   workoutTime: string; // "17:30"
   streakAlerts: boolean;
+}
+
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: string;
+  status?: 'sending' | 'success' | 'error';
+  errorMessage?: string;
+  sources?: string[];
+  suggestedActions?: { label: string; action: string }[];
+}
+
+export interface ChatSession {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  messages: ChatMessage[];
+}
+
+export interface VerifiedFoodItem {
+  id: string;
+  name: string;
+  category: 'Protein' | 'Carbohydrates & Grains' | 'Vegetables & Greens' | 'Fruits' | 'Healthy Fats & Oils' | 'Dairy & Alternatives' | 'Snacks & Supplements' | 'Regional & Indian Staples';
+  servingSize: string;
+  servingWeightGrams: number;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fiber: number;
+  source: 'USDA FoodData Central' | 'Verified Nutrition Standard' | 'Regional Food Database';
+  dietaryTags?: string[];
 }

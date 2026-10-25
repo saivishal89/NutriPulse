@@ -103,6 +103,7 @@ export const AiPhotoScanner: React.FC<AiPhotoScannerProps> = ({
   const [activePresetKey, setActivePresetKey] = useState<string>('chipotle');
   const [currentScan, setCurrentScan] = useState<ScanData>(PRESETS.chipotle);
   const [isScanning, setIsScanning] = useState<boolean>(false);
+  const [scanError, setScanError] = useState<string | null>(null);
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
@@ -168,6 +169,7 @@ export const AiPhotoScanner: React.FC<AiPhotoScannerProps> = ({
 
   const analyzeCustomImage = async (base64Image: string, mimeType: string) => {
     setIsScanning(true);
+    setScanError(null);
     try {
       const response = await fetch('/api/analyze-meal', {
         method: 'POST',
@@ -179,45 +181,31 @@ export const AiPhotoScanner: React.FC<AiPhotoScannerProps> = ({
         }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setCurrentScan({
-          title: data.mealName || "Nutritious Protein Meal",
-          confidence: `${Math.round((data.confidence || 0.95) * 100)}% MATCH`,
-          grade: (data.healthScore || 9) > 9 ? "A+" : "A",
-          cals: data.totalCalories || 580,
-          protein: data.totalProtein || 42,
-          carbs: data.totalCarbs || 50,
-          fat: data.totalFat || 18,
-          fiber: data.fiber || 8,
-          sodium: "640 mg",
-          potassium: "820 mg",
-          tags: data.dietaryTags || ["High Protein", "Clean Refuel"],
-          tip: data.nutritionInsights || "Great nutritional composition. Meets key recovery needs with clean macronutrient balance.",
-          imageUrl: base64Image
-        });
-        sounds.success();
-      } else {
-        throw new Error('Analysis API failed');
+      if (!response.ok) {
+        const errJson = await response.json().catch(() => ({}));
+        throw new Error(errJson.error || `Food image analysis failed (status ${response.status})`);
       }
-    } catch (err) {
-      // Fallback
+
+      const data = await response.json();
       setCurrentScan({
-        title: "Balanced Athletic Macro Plate",
-        confidence: "94.2% MATCH",
-        grade: "A",
-        cals: 560,
-        protein: 44,
-        carbs: 52,
-        fat: 16,
-        fiber: 7,
-        sodium: "580 mg",
-        potassium: "760 mg",
-        tags: ["High Protein", "Macro Matched"],
-        tip: "Solid fuel choice! High biological value protein with balanced glycemic carbohydrates for steady energy.",
+        title: data.mealName || "Nutritious Protein Meal",
+        confidence: `${Math.round((data.confidence || 0.95) * 100)}% MATCH`,
+        grade: (data.healthScore || 9) > 9 ? "A+" : "A",
+        cals: data.totalCalories || 580,
+        protein: data.totalProtein || 42,
+        carbs: data.totalCarbs || 50,
+        fat: data.totalFat || 18,
+        fiber: data.fiber || 8,
+        sodium: "640 mg",
+        potassium: "820 mg",
+        tags: data.dietaryTags || ["High Protein", "Clean Refuel"],
+        tip: data.nutritionInsights || "Great nutritional composition. Meets key recovery needs with clean macronutrient balance.",
         imageUrl: base64Image
       });
       sounds.success();
+    } catch (err: any) {
+      console.error('Food scan error:', err);
+      setScanError(err?.message || 'Failed to analyze meal photo with AI. You can retry with a clearer photo or log this meal via the Verified Database.');
     } finally {
       setIsScanning(false);
     }
@@ -355,6 +343,22 @@ export const AiPhotoScanner: React.FC<AiPhotoScannerProps> = ({
             }`}
           >
             <span>🥩</span> Seared Ribeye
+          </button>
+        </div>
+      )}
+
+      {scanError && (
+        <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-rose-400 text-[20px]">warning</span>
+            <span>{scanError}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setScanError(null)}
+            className="text-xs text-rose-400 hover:text-white underline cursor-pointer"
+          >
+            Dismiss
           </button>
         </div>
       )}
